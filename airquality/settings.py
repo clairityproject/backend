@@ -36,6 +36,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # the following applications are not default apps
+    # and have been added by the dev. team
+    # django-tastypie implements a lot of the API stuff
+    'tastypie',
+    # django south manages database migrations
+    'south',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -80,3 +86,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# override settings locally.
+try:
+    from local_settings import *
+except ImportError:
+        pass
