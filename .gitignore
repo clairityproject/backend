@@ -36,9 +36,13 @@ nosetests.xml
 .pydevproject
 
 #vim
-.swp
+*.swp
+*.swo
 
 
 # django specific
 local_settings.py
 db.sqlite3
+
+# static folder
+static
