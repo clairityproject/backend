@@ -42,6 +42,8 @@ INSTALLED_APPS = (
     'tastypie',
     # django south manages database migrations
     'south',
+    # app to manage data
+    'data',
 )
 
 MIDDLEWARE_CLASSES = (

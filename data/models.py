@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class IP(models.Model):
-    node = models.ForeignKey('Node')
+    node_number = models.IntegerField(null=True, blank=True)
     address = models.IPAddressField(null=True, blank=True)
     added_on = models.DateTimeField(auto_now_add=True)
 
@@ -11,8 +11,13 @@ class Node(models.Model):
     number = models.IntegerField(blank=True, null=True)
     added_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
-    ip = models.ForeignKey(IP)
- 
+    ip = models.ForeignKey('IP')
+
+class Location(models.Model):
+    name = models.CharField(max_length=200, blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+
 class DataPoint(models.Model):
     node = models.ForeignKey(Node)
     temperature = models.FloatField(null=True, blank=True)
@@ -33,5 +38,4 @@ class DataPoint(models.Model):
     reading_time = models.DateTimeField(blank=True, null=True)
     added_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
-
 
