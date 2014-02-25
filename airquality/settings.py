@@ -53,6 +53,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'data.middleware.cross_domain_middleware.XsSharing',
 )
 
 ROOT_URLCONF = 'airquality.urls'
