@@ -87,6 +87,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# django-tastypie settings
+TASTYPIE_DEFAULT_FORMATS = ['json']
+
+
 # override settings locally.
 try:
     from local_settings import *
