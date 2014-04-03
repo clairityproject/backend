@@ -19,10 +19,10 @@ class Location(models.Model):
     longitude = models.FloatField(blank=True, null=True)
 
 class DataPoint(models.Model):
-    node = models.ForeignKey(Node)
+    #node = models.ForeignKey(Node)
+    node_id = models.IntegerField(blank=False, null=False)
     temperature = models.FloatField(null=True, blank=True)
-    # relative humidity
-    rh = models.FloatField(null=True, blank=True) 
+    rh = models.FloatField(null=True, blank=True) # relative humidity
     dylos_bin_1 = models.FloatField(blank=True, null=True)
     dylos_bin_2 = models.FloatField(blank=True, null=True)
     dylos_bin_3 = models.FloatField(blank=True, null=True)

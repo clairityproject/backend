@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     #:::::::::::::::::::::::::::::
     #    API
     #:::::::::::::::::::::::::::::
+    url(r'^node/postdata/','data.views.secret_post'),
     url(r'^api/', include(dataurls)),
     #:::::::::::::::::::::::::::::
     #    website

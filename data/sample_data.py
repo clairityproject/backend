@@ -21,7 +21,7 @@ c = count()
 # create nodes
 for query in ["center","house"]:
     data = json.loads("".join(urllib2.urlopen("http://whereis.mit.edu/search?type=query&q="+query+"&output=json").readlines()))
-
+    
     for d in data:
         # create locations
         loc= Location(name=d['name'], latitude=d['lat_wgs84'], longitude=d['long_wgs84'])
@@ -41,7 +41,7 @@ nodes = Node.objects.all()
 
 for node in nodes:
     for x in xrange(DATAPOINTS_PER_NODE):
-        DataPoint(node=node, 
+        DataPoint(node_id=node.pk, 
                 temperature=random.uniform(-3,80), 
                 rh=random.uniform(12,50), 
                 dylos_bin_1=random.randint(0,100),
