@@ -1,10 +1,9 @@
 import json
 import urllib2
+from datetime import datetime
 
 real_url = 'http://ec2-54-187-18-145.us-west-2.compute.amazonaws.com/node/postdata/'
-
 url = 'http://localhost:8000/node/postdata/'
-from datetime import datetime
 
 values = {'node_id' : 3,
         'temperature' : 20.3,
@@ -23,12 +22,6 @@ values = {'node_id' : 3,
         'alphasense_8' : 20.3,
         'reading_time' : datetime.now().isoformat()
         }
-data = json.dumps(values)
-req = urllib2.Request(url, data)
-f = urllib2.urlopen(req)
-print f.read()
-f.close()
-
 
 ##################################################
 # Method 2 
