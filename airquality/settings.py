@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'south',
     # app to manage data
     'data',
+    'website',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -2,8 +2,8 @@ import json
 import urllib2
 from datetime import datetime
 
-real_url = 'http://ec2-54-187-18-145.us-west-2.compute.amazonaws.com/node/postdata/'
-url = 'http://localhost:8000/node/postdata/'
+url = 'http://ec2-54-187-18-145.us-west-2.compute.amazonaws.com/node/postdata/'
+#url = 'http://localhost:8000/node/postdata/'
 
 values = {'node_id' : 3,
         'temperature' : 20.3,
