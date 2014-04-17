@@ -12,10 +12,14 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     #:::::::::::::::::::::::::::::
-    #    API
+    #    API (coding team)
     #:::::::::::::::::::::::::::::
-    url(r'^node/postdata/','data.views.secret_post'),
+    url(r'^node/postdata/$','data.views.secret_post'),
+    url(r'^node/postdata/dylos/','data.views.secret_post_dylos'),
+    url(r'^node/postdata/met/','data.views.secret_post_met'),
+    url(r'^node/postdata/alphasense/$','data.views.secret_post_alphasense'),
     url(r'^api/', include(dataurls)),
+
     #:::::::::::::::::::::::::::::
     #    website
     #:::::::::::::::::::::::::::::

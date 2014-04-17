@@ -39,3 +39,37 @@ class DataPoint(models.Model):
     added_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
 
+class Dylos(models.Model):
+    node_id = models.IntegerField(blank=False, null=False)
+    dylos_bin_1 = models.FloatField(blank=True, null=True)
+    dylos_bin_2 = models.FloatField(blank=True, null=True)
+    dylos_bin_3 = models.FloatField(blank=True, null=True)
+    dylos_bin_4 = models.FloatField(blank=True, null=True)
+    reading_time = models.DateTimeField(blank=True, null=True)
+    added_on = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
+
+class Alphasense(models.Model):
+    node_id = models.IntegerField(blank=False, null=False)
+    alphasense_1 = models.FloatField(blank=True, null=True)
+    alphasense_2 = models.FloatField(blank=True, null=True)
+    alphasense_3 = models.FloatField(blank=True, null=True)
+    alphasense_4 = models.FloatField(blank=True, null=True)
+    alphasense_5 = models.FloatField(blank=True, null=True)
+    alphasense_6 = models.FloatField(blank=True, null=True)
+    alphasense_7 = models.FloatField(blank=True, null=True)
+    alphasense_8 = models.FloatField(blank=True, null=True)
+    reading_time = models.DateTimeField(blank=True, null=True)
+    added_on = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
+
+
+class Met(models.Model):
+    ## This is the meteorological class
+    node_id = models.IntegerField(blank=False, null=False)
+    temperature = models.FloatField(null=True, blank=True)
+    rh = models.FloatField(null=True, blank=True) # relative humidity
+    reading_time = models.DateTimeField(blank=True, null=True)
+    added_on = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
+
