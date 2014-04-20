@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
+from data.models import DataPoint, Met, Alphasense, Dylos, AQI
 import json
-from data.models import DataPoint, Met, Alphasense, Dylos
+import datetime
 
+#------------------------------------------------------------
+#  Post Entries for the coding team
+#------------------------------------------------------------
 
-# Create your views here.
 @csrf_exempt
 def secret_post(request):
+    """Function left for legacy reasons. TODO: remove after db migration"""
     response_data = {}
     status = 400
     if request.method == "POST":
@@ -122,3 +126,44 @@ def secret_post_met(request):
 
     return HttpResponse(json.dumps(response_data), content_type="application/json", status=status)
 
+
+
+
+#------------------------------------------------------------
+#  Post Entries for the front-end
+#------------------------------------------------------------
+
+
+@csrf_exempt
+def get_latest(request, hour=False,  day=False, week=False):
+    if week or day or hour:
+        end_date = datetime.datetime.now()
+        if week:
+            start_date = end_date - datetime.timedelta(days=7)
+        elif day:
+            start_date = end_date - datetime.timedelta(hours=24)
+        else:
+            # past hour
+            start_date = end_date - datetime.timedelta(minutes=60)
+
+        # return current latest
+        node_ids = range(1,26)
+        results = []
+
+        for node_id in node_ids:
+            latest = AQI.objects.filter(node_id=node_id).filter(added_on__range=(start_date, end_date))
+            if latest:
+                results.extend(latest)
+
+        return HttpResponse(json.dumps(results), content_type="application/json", status=200)
+
+    else:
+        # return current latest single element
+        node_ids = range(1,26)
+        results = []
+        for node_id in node_ids:
+            latest = AQI.objects.filter(node_id=node_id).latest('id')
+            if latest:
+                results.append(latest)
+
+        return HttpResponse(json.dumps(results), content_type="application/json", status=200)

@@ -29,4 +29,12 @@ urlpatterns = patterns('',
     #    admin
     #:::::::::::::::::::::::::::::
     url(r'^admin/', include(admin.site.urls)),
+
+    #:::::::::::::::::::::::::::::
+    #    API (front-end team)
+    #:::::::::::::::::::::::::::::
+    url(r'^latest/$', 'data.views.get_latest'),
+    url(r'^latest/hour/$', 'data.views.get_latest', {'hour':True} ),
+    url(r'^latest/day/$', 'data.views.get_latest', {'day':True} ),
+    url(r'^latest/week/$', 'data.views.get_latest', {'week':True} ),
 )
