@@ -133,7 +133,6 @@ def secret_post_met(request):
 #  Post Entries for the front-end
 #------------------------------------------------------------
 
-
 @csrf_exempt
 def get_latest(request, hour=False,  day=False, week=False):
     if week or day or hour:
@@ -154,7 +153,6 @@ def get_latest(request, hour=False,  day=False, week=False):
             latest = AQI.objects.filter(node_id=node_id).filter(added_on__range=(start_date, end_date))
             if latest:
                 results.extend(latest)
-
         return HttpResponse(json.dumps(results), content_type="application/json", status=200)
 
     else:
@@ -162,8 +160,11 @@ def get_latest(request, hour=False,  day=False, week=False):
         node_ids = range(1,26)
         results = []
         for node_id in node_ids:
-            latest = AQI.objects.filter(node_id=node_id).latest('id')
-            if latest:
-                results.append(latest)
-
+            try:
+                latest = AQI.objects.filter(node_id=node_id).latest('id')
+                if latest:
+                    results.append(latest)
+            except:
+                pass
         return HttpResponse(json.dumps(results), content_type="application/json", status=200)
+

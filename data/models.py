@@ -1,22 +1,11 @@
 from django.db import models
 
 #------------------------------------------------------------
-#    Base Classes
-#------------------------------------------------------------
-
-class Base(models.Model):
-    added_on = models.DateTimeField(auto_now_add=True)
-    last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
-
-class BaseReading(Base):
-    reading_time = models.DateTimeField(blank=True, null=True)
-
-#------------------------------------------------------------
 #    Utility Classes
 #------------------------------------------------------------
 
 class Node(models.Model):
-    number = models.IntegerField(blank=True, null=True)
+    node_id = models.IntegerField(blank=True, null=True)
     added_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
     ip_address = models.IPAddressField(null=True, blank=True)
@@ -28,7 +17,7 @@ class Node(models.Model):
 #    Data Classes
 #------------------------------------------------------------
 
-class DataPoint(BaseReading):
+class DataPoint(models.Model):
     node_id = models.IntegerField(blank=False, null=False)
     temperature = models.FloatField(null=True, blank=True)
     rh = models.FloatField(null=True, blank=True) # relative humidity
@@ -44,15 +33,21 @@ class DataPoint(BaseReading):
     alphasense_6 = models.FloatField(blank=True, null=True)
     alphasense_7 = models.FloatField(blank=True, null=True)
     alphasense_8 = models.FloatField(blank=True, null=True)
+    added_on = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
+    reading_time = models.DateTimeField(blank=True, null=True)
 
-class Dylos(BaseReading):
+class Dylos(models.Model):
     node_id = models.IntegerField(blank=False, null=False)
     dylos_bin_1 = models.FloatField(blank=True, null=True)
     dylos_bin_2 = models.FloatField(blank=True, null=True)
     dylos_bin_3 = models.FloatField(blank=True, null=True)
     dylos_bin_4 = models.FloatField(blank=True, null=True)
+    added_on = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
+    reading_time = models.DateTimeField(blank=True, null=True)
 
-class Alphasense(BaseReading):
+class Alphasense(models.Model):
     node_id = models.IntegerField(blank=False, null=False)
     alphasense_1 = models.FloatField(blank=True, null=True)
     alphasense_2 = models.FloatField(blank=True, null=True)
@@ -62,13 +57,19 @@ class Alphasense(BaseReading):
     alphasense_6 = models.FloatField(blank=True, null=True)
     alphasense_7 = models.FloatField(blank=True, null=True)
     alphasense_8 = models.FloatField(blank=True, null=True)
+    added_on = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
+    reading_time = models.DateTimeField(blank=True, null=True)
 
 
-class Met(BaseReading):
+class Met(models.Model):
     ## This is the meteorological class
     node_id = models.IntegerField(blank=False, null=False)
     temperature = models.FloatField(null=True, blank=True)
     rh = models.FloatField(null=True, blank=True) # relative humidity
+    added_on = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
+    reading_time = models.DateTimeField(blank=True, null=True)
 
 class AQI(models.Model):
     """ This is where data is stored after processing"""
@@ -91,5 +92,6 @@ class AQI(models.Model):
     dylos_bin_3_rank = models.IntegerField(blank=True, null=True)
     dylos_bin_4_rank = models.IntegerField(blank=True, null=True)
     mitaqi_rank = models.IntegerField(blank=True, null=True)
-
+    added_on = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
 
