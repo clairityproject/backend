@@ -95,6 +95,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # django-tastypie settings
 TASTYPIE_DEFAULT_FORMATS = ['json']
 
+# twilio
+TWILIO_ACC_SID = ""
+TWILIO_AUTH_TOKEN = ""
+TWILIO_FROM = ""
+
 
 # override settings locally.
 try:
