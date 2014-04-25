@@ -5,13 +5,16 @@ from django.db import models
 #------------------------------------------------------------
 
 class Node(models.Model):
-    node_id = models.IntegerField(blank=True, null=True)
-    added_on = models.DateTimeField(auto_now_add=True)
-    last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
-    ip_address = models.IPAddressField(null=True, blank=True)
+    node_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=200, blank=True, null=True)
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
+    added_on = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
+    indoor = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return str(self.node_id) + " , " + self.name
 
 #------------------------------------------------------------
 #    Data Classes
@@ -37,6 +40,9 @@ class DataPoint(models.Model):
     last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
     reading_time = models.DateTimeField(blank=True, null=True)
 
+    def __unicode__(self):
+        return str(self.node_id) + " , " + str(self.reading_time)
+
 class Dylos(models.Model):
     node_id = models.IntegerField(blank=False, null=False)
     dylos_bin_1 = models.FloatField(blank=True, null=True)
@@ -46,6 +52,9 @@ class Dylos(models.Model):
     added_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
     reading_time = models.DateTimeField(blank=True, null=True)
+
+    def __unicode__(self):
+        return str(self.node_id) + ", " + str([self.dylos_bin_1 , self.dylos_bin_2, self.dylos_bin_3, self.dylos_bin_4])
 
 class Alphasense(models.Model):
     node_id = models.IntegerField(blank=False, null=False)
@@ -61,6 +70,9 @@ class Alphasense(models.Model):
     last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
     reading_time = models.DateTimeField(blank=True, null=True)
 
+    def __unicode__(self):
+        return str(self.node_id) + ", " + str([self.alphasense_1, self.alphasense_2, self.alphasense_3, self.alphasense_4, self.alphasense_5, self.alphasense_6, self.alphasense_7, self.alphasense_8]) 
+
 
 class Met(models.Model):
     ## This is the meteorological class
@@ -70,6 +82,9 @@ class Met(models.Model):
     added_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
     reading_time = models.DateTimeField(blank=True, null=True)
+
+    def __unicode__(self):
+        return str(self.node_id) + ", " + str([self.temperature , self.rh])
 
 class AQI(models.Model):
     """ This is where data is stored after processing"""
@@ -95,3 +110,5 @@ class AQI(models.Model):
     added_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
 
+    def __unicode__(self):
+        return str(self.node_id) + ", " + self.mitaqi_rank
