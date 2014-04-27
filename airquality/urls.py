@@ -33,6 +33,7 @@ urlpatterns = patterns('',
     #:::::::::::::::::::::::::::::
     #    API (front-end team)
     #:::::::::::::::::::::::::::::
+    url(r'^latest/all/$', 'data.views.get_latest_now_fix'),
     url(r'^latest/$', 'data.views.get_latest'),
     url(r'^latest/hour/$', 'data.views.get_latest', {'hour':True} ),
     url(r'^latest/day/$', 'data.views.get_latest', {'day':True} ),

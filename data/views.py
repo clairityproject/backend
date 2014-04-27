@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
-from data.models import DataPoint, Met, Alphasense, Dylos, AQI
+from data.models import DataPoint, Met, Alphasense, Dylos, AQI, Node
 import json
 import datetime
 
@@ -168,3 +168,49 @@ def get_latest(request, hour=False,  day=False, week=False):
                 pass
         return HttpResponse(json.dumps(results), content_type="application/json", status=200)
 
+
+@csrf_exempt
+def get_latest_now_fix(request):
+    nodes = Node.objects.all()
+    results = []
+    for node in nodes:
+        d = {}
+        d['node_id'] = node.node_id
+        d['name'] = node.name
+        d['latitude'] = node.latitude
+        d['longitude'] = node.longitude
+        d['indoor'] = node.indoor
+
+        try:
+            dylos = Dylos.objects.filter(node_id=node.node_id).latest('added_on')
+            if dylos:
+                d['dylos_bin_1'] = dylos.dylos_bin_1
+                d['dylos_bin_2'] = dylos.dylos_bin_2
+                d['dylos_bin_3'] = dylos.dylos_bin_3
+                d['dylos_bin_4'] = dylos.dylos_bin_4
+        except:
+            pass
+
+        try:
+            alphasense = Alphasense.objects.filter(node_id=node.node_id).latest('added_on')
+
+            if alphasense:
+                NO2_OP1 = alphasense.alphasense_1
+                NO2_OP2 = alphasense.alphasense_2
+                #d['no2'] = ((WE-WE_Vo)-(Aux-AUX_Vo))/sensitivity
+                d['no2'] = 232
+                O3_OP1= alphasense.alphasense_3
+                O3_OP2 = alphasense.alphasense_4
+                d['o3'] = 423
+                CO_OP1= alphasense.alphasense_5
+                CO_OP2= alphasense.alphasense_6
+                d['co'] = 234
+                NO_OP1= alphasense.alphasense_7
+                NO_OP2= alphasense.alphasense_8
+                d['no'] = 236
+        except:
+            pass
+
+        results.append(d)
+
+    return HttpResponse(json.dumps(results), content_type="application/json", status=200)
