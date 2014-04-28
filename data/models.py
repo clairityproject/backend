@@ -139,3 +139,40 @@ class AQI(models.Model):
 
     def __unicode__(self):
         return str(self.node_id) + ", " + self.mitaqi_rank
+
+
+class SensorDetail(models.Model):
+    node_id = models.IntegerField(blank=False, null=False)
+
+    no_serial = models.CharField(max_length=200, blank=True, null=True)
+    o3_serial = models.CharField(max_length=200, blank=True, null=True)
+    no2_serial = models.CharField(max_length=200, blank=True, null=True)
+    co_serial = models.CharField(max_length=200, blank=True, null=True)
+
+    no_electronic_we_zero = models.IntegerField(blank=True, null=True)
+    no_total_we_zero = models.IntegerField(blank=True, null=True)
+    no_electronic_aux_zero = models.IntegerField(blank=True, null=True)
+    no_total_aux_zero  = models.IntegerField(blank=True, null=True)
+    no_electronic_we_sens = models.IntegerField(blank=True, null=True)
+    no_total_we_sens = models.FloatField(blank=True, null=True)
+
+    o3_electronic_we_zero = models.IntegerField(blank=True, null=True)
+    o3_total_we_zero = models.IntegerField(blank=True, null=True)
+    o3_electronic_aux_zero = models.IntegerField(blank=True, null=True)
+    o3_total_aux_zero  = models.IntegerField(blank=True, null=True)
+    o3_electronic_we_sens = models.IntegerField(blank=True, null=True)
+    o3_total_we_sens = models.FloatField(blank=True, null=True)
+
+    no2_electronic_we_zero = models.IntegerField(blank=True, null=True)
+    no2_total_we_zero = models.IntegerField(blank=True, null=True)
+    no2_electronic_aux_zero = models.IntegerField(blank=True, null=True)
+    no2_total_aux_zero  = models.IntegerField(blank=True, null=True)
+    no2_electronic_we_sens = models.IntegerField(blank=True, null=True)
+    no2_total_we_sens = models.FloatField(blank=True, null=True)
+
+    co_electronic_we_zero = models.IntegerField(blank=True, null=True)
+    co_total_we_zero = models.IntegerField(blank=True, null=True)
+    co_electronic_aux_zero = models.IntegerField(blank=True, null=True)
+    co_total_aux_zero  = models.IntegerField(blank=True, null=True)
+    co_electronic_we_sens = models.IntegerField(blank=True, null=True)
+    co_total_we_sens = models.FloatField(blank=True, null=True)
