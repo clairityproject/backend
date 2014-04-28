@@ -245,28 +245,28 @@ def get_latest_now_fix(request):
     nodes = Latest.objects.all()
     results = []
 
-    for node in nodes:
+    for lnode in nodes:
         d = {}
-        d['name'] = node.name
-        d['indoor'] = node.indoor
-        d['latitude'] = node.latitude
-        d['longitude'] = node.longitude
-        d['temperature'] = node.temperature
-        d['rh'] = node.rh
-        d['dylos_bin_1'] = node.dylos_bin_1
-        d['dylos_bin_2'] = node.dylos_bin_2
-        d['dylos_bin_3'] = node.dylos_bin_3
-        d['dylos_bin_4'] = node.dylos_bin_4
-        d['alphasense_1'] = node.alphasense_1
-        d['alphasense_2'] = node.alphasense_2
-        d['alphasense_3'] = node.alphasense_3
-        d['alphasense_4'] = node.alphasense_4
-        d['alphasense_5'] = node.alphasense_5
-        d['alphasense_6'] = node.alphasense_6
-        d['alphasense_7'] = node.alphasense_7
-        d['alphasense_8'] = node.alphasense_8
-
-        d['last_modified'] = str(node.last_modified)
+        d['name'] = lnode.name
+        d['node_id'] = lnode.node_id
+        d['indoor'] = lnode.indoor
+        d['latitude'] = lnode.latitude
+        d['longiude'] = lnode.longitude
+        d['temperature'] = lnode.temperature
+        d['rh'] = lnode.rh
+        d['dylos_bin_1'] = lnode.dylos_bin_1
+        d['dylos_bin_2'] = lnode.dylos_bin_2
+        d['dylos_bin_3'] = lnode.dylos_bin_3
+        d['dylos_bin_4'] = lnode.dylos_bin_4
+        d['alphasense_1'] = lnode.alphasense_1
+        d['alphasense_2'] = lnode.alphasense_2
+        d['alphasense_3'] = lnode.alphasense_3
+        d['alphasense_4'] = lnode.alphasense_4
+        d['alphasense_5'] = lnode.alphasense_5
+        d['alphasense_6'] = lnode.alphasense_6
+        d['alphasense_7'] = lnode.alphasense_7
+        d['alphasense_8'] = lnode.alphasense_8
+        d['last_modified'] = str(lnode.last_modified)
         results.append(d)
 
     return HttpResponse(json.dumps(results), content_type="application/json", status=200)
