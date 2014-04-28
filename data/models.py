@@ -16,6 +16,34 @@ class Node(models.Model):
     def __unicode__(self):
         return str(self.node_id) + " , " + self.name
 
+class Latest(models.Model):
+    node_id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=200, blank=True, null=True)
+    indoor = models.BooleanField(default=False)
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+
+    temperature = models.FloatField(null=True, blank=True)
+    rh = models.FloatField(null=True, blank=True) # relative humidity
+
+    dylos_bin_1 = models.FloatField(blank=True, null=True)
+    dylos_bin_2 = models.FloatField(blank=True, null=True)
+    dylos_bin_3 = models.FloatField(blank=True, null=True)
+    dylos_bin_4 = models.FloatField(blank=True, null=True)
+
+    alphasense_1 = models.FloatField(blank=True, null=True)
+    alphasense_2 = models.FloatField(blank=True, null=True)
+    alphasense_3 = models.FloatField(blank=True, null=True)
+    alphasense_4 = models.FloatField(blank=True, null=True)
+    alphasense_5 = models.FloatField(blank=True, null=True)
+    alphasense_6 = models.FloatField(blank=True, null=True)
+    alphasense_7 = models.FloatField(blank=True, null=True)
+    alphasense_8 = models.FloatField(blank=True, null=True)
+
+    added_on = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
+
+
 #------------------------------------------------------------
 #    Data Classes
 #------------------------------------------------------------

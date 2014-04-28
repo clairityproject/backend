@@ -1,5 +1,5 @@
 from django.contrib import admin
-from data.models import  Node, DataPoint, AQI, Dylos, Alphasense, Met
+from data.models import  Node, DataPoint, AQI, Dylos, Alphasense, Met, Latest
 import csv
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
@@ -39,3 +39,5 @@ admin.site.register(AQI, BaseAdmin)
 admin.site.register(Dylos, BaseAdmin)
 admin.site.register(Alphasense, BaseAdmin)
 admin.site.register(Met, BaseAdmin)
+
+admin.site.register(Latest, BaseAdmin)
