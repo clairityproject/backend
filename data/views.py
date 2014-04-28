@@ -20,7 +20,6 @@ def secret_post(request):
         status = 200
 
         try:
-
             point = DataPoint(
                     node_id = request.POST.get('node_id'),
                     temperature = request.POST.get('temperature'),
@@ -72,6 +71,7 @@ def secret_post_dylos(request):
 
                 if created:
                     n = Node.objects.get(node_id=point.node_id)
+                    ltst.node_id = n.node_id
                     ltst.name = n.name
                     ltst.latitude = n.latitude
                     ltst.longitude = n.longitude
@@ -126,6 +126,7 @@ def secret_post_alphasense(request):
 
                 if created:
                     n = Node.objects.get(node_id=point.node_id)
+                    ltst.node_id = n.node_id
                     ltst.name = n.name
                     ltst.latitude = n.latitude
                     ltst.longitude = n.longitude
@@ -176,6 +177,7 @@ def secret_post_met(request):
 
                 if created:
                     n = Node.objects.get(node_id=point.node_id)
+                    ltst.node_id = n.node_id
                     ltst.name = n.name
                     ltst.latitude = n.latitude
                     ltst.longitude = n.longitude
