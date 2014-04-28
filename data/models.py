@@ -43,7 +43,6 @@ class Latest(models.Model):
     added_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
 
-
 #------------------------------------------------------------
 #    Data Classes
 #------------------------------------------------------------

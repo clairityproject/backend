@@ -32,6 +32,31 @@ class BaseAdmin(admin.ModelAdmin):
     actions = [export_as_csv]
     list_filter = ('added_on',)
 
+
+class  LatestAdmin(BaseAdmin):
+    list_display = ['node_id',
+            'name',
+            'indoor',        
+            'latitude',      
+            'longitude',     
+            'temperature',   
+            'rh',            
+            'dylos_bin_1',   
+            'dylos_bin_2',   
+            'dylos_bin_3',   
+            'dylos_bin_4',   
+            'alphasense_1',  
+            'alphasense_2',  
+            'alphasense_3',  
+            'alphasense_4',  
+            'alphasense_5',  
+            'alphasense_6',  
+            'alphasense_7',  
+            'alphasense_8',  
+            'last_modified']
+    list_filter = ('last_modified','indoor')
+
+
 admin.site.register(Node, BaseAdmin)
 admin.site.register(DataPoint, BaseAdmin)
 admin.site.register(AQI, BaseAdmin)
@@ -40,4 +65,4 @@ admin.site.register(Dylos, BaseAdmin)
 admin.site.register(Alphasense, BaseAdmin)
 admin.site.register(Met, BaseAdmin)
 
-admin.site.register(Latest, BaseAdmin)
+admin.site.register(Latest, LatestAdmin)
