@@ -13,7 +13,7 @@ for n in Node.objects.all():
         m = Met.objects.filter(node_id=n.node_id).latest('added_on')
         if m:
             l.rh = m.rh
-            l.temperature = n.temperature
+            l.temperature = m.temperature
             l.save()
 
     except:
