@@ -30,7 +30,7 @@ export_as_csv.short_description = "Export selected objects as csv file"
 
 class BaseAdmin(admin.ModelAdmin):
     actions = [export_as_csv]
-    list_filter = ('added_on',)
+    list_filter = ('added_on','node_id')
 
 
 class  LatestAdmin(BaseAdmin):
