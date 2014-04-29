@@ -3,6 +3,7 @@ from data.models import  Node, DataPoint, AQI, Dylos, Alphasense, Met, Latest
 import csv
 from django.core.exceptions import PermissionDenied
 from django.http import StreamingHttpResponse
+import itertools
 
 class Echo(object):
     """An object that implements just the write method of the file-like
@@ -16,20 +17,25 @@ def export_as_csv(modeladmin, request, queryset):
     """
     Generic csv export admin action.
     """
-    print "Entering expoirt_as sc"
-    print queryset.query
+    opts = modeladmin.model._meta
+    field_names = [field.name for field in opts.fields]
+
+    def csvgen():
+            yield writer.writerow(field_names)
+            gen = (writer.writerow([getattr(obj, field) for field in field_names]) for obj in queryset.iterator())
+            for row in gen:
+                yield row
+
+
     if not request.user.is_staff:
         raise PermissionDenied
-    opts = modeladmin.model._meta
+
     pseudo_buffer = Echo()
     writer = csv.writer(pseudo_buffer)
-    field_names = [field.name for field in opts.fields]
     # Write a first row with header information
-    writer.writerow(field_names)
     # Write data rows
 
-    response = StreamingHttpResponse((writer.writerow([getattr(obj, field) for field in field_names]) for obj in queryset.iterator()),
-            content_type='text/csv')
+    response = StreamingHttpResponse(csvgen(), content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename=%s.csv' % unicode(opts).replace('.', '_')
 
     return response
