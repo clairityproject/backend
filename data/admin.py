@@ -16,6 +16,8 @@ def export_as_csv(modeladmin, request, queryset):
     """
     Generic csv export admin action.
     """
+    print "Entering expoirt_as sc"
+    print queryset.query
     if not request.user.is_staff:
         raise PermissionDenied
     opts = modeladmin.model._meta
@@ -26,7 +28,7 @@ def export_as_csv(modeladmin, request, queryset):
     writer.writerow(field_names)
     # Write data rows
 
-    response = StreamingHttpResponse((writer.writerow([getattr(obj, field) for field in field_names]) for obj in queryset),
+    response = StreamingHttpResponse((writer.writerow([getattr(obj, field) for field in field_names]) for obj in queryset.iterator()),
             content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename=%s.csv' % unicode(opts).replace('.', '_')
 
