@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     #    website
     #:::::::::::::::::::::::::::::
     url(r'^$', index , name='home'),
+    url(r'^export/', 'website.views.export', name='export'),
 
     #:::::::::::::::::::::::::::::
     #    admin

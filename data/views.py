@@ -253,7 +253,7 @@ def get_latest_now_fix(request):
         d['node_id'] = lnode.node_id
         d['indoor'] = lnode.indoor
         d['latitude'] = lnode.latitude
-        d['longiude'] = lnode.longitude
+        d['longitude'] = lnode.longitude
         d['temperature'] = lnode.temperature
         d['rh'] = lnode.rh
         d['dylos_bin_1'] = lnode.dylos_bin_1

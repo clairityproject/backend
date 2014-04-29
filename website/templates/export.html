@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <form action="/export">
+    {% for node in form.nodes %}
+    {{ node.id}}
+    {% endfor %}
+    </form>
+</body>
+</html>
