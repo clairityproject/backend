@@ -164,7 +164,7 @@ class SensorDetail(models.Model):
     o3_total_we_sens = models.FloatField(blank=True, null=True)
 
     no2_electronic_we_zero = models.IntegerField(blank=True, null=True)
-    no2_total_we_zero = models.IntegerField(blank=True, null=True)
+    no2_total_we_zero = models.IntegerField(blank=True, null=True) # use this
     no2_electronic_aux_zero = models.IntegerField(blank=True, null=True)
     no2_total_aux_zero  = models.IntegerField(blank=True, null=True)
     no2_electronic_we_sens = models.IntegerField(blank=True, null=True)

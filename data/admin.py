@@ -75,13 +75,23 @@ class  LatestAdmin(BaseAdmin):
             'last_modified']
     list_filter = ('last_modified','indoor')
 
+class DylosAdmin(BaseAdmin):
+    list_display = ('node_id','dylos_bin_1','dylos_bin_2','dylos_bin_3','dylos_bin_4', 'reading_time', 'added_on')
+
+class AlphasenseAdmin(BaseAdmin):
+    list_display = ('node_id', 'alphasense_1', 'alphasense_2', 'alphasense_3',
+            'alphasense_4', 'alphasense_5', 'alphasense_6', 'alphasense_7', 'alphasense_8', 'reading_time', 'added_on')
+
+class MetAdmin(BaseAdmin):
+    list_display = ('node_id', 'rh', 'temperature', 'reading_time', 'added_on')
+
 
 admin.site.register(Node, BaseAdmin)
-admin.site.register(DataPoint, BaseAdmin)
+#admin.site.register(DataPoint, BaseAdmin)
 admin.site.register(AQI, BaseAdmin)
 
-admin.site.register(Dylos, BaseAdmin)
-admin.site.register(Alphasense, BaseAdmin)
-admin.site.register(Met, BaseAdmin)
+admin.site.register(Dylos, DylosAdmin)
+admin.site.register(Alphasense, AlphasenseAdmin)
+admin.site.register(Met, MetAdmin)
 
 admin.site.register(Latest, LatestAdmin)
