@@ -2,7 +2,15 @@ from django.contrib import admin
 from data.models import  Node, DataPoint, AQI, Dylos, Alphasense, Met, Latest
 import csv
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponse
+from django.http import StreamingHttpResponse
+
+class Echo(object):
+    """An object that implements just the write method of the file-like
+    interface.
+    """
+    def write(self, value):
+        """Write the value by returning it, instead of storing in a buffer."""
+        return value
 
 def export_as_csv(modeladmin, request, queryset):
     """
@@ -11,16 +19,19 @@ def export_as_csv(modeladmin, request, queryset):
     if not request.user.is_staff:
         raise PermissionDenied
     opts = modeladmin.model._meta
-    response = HttpResponse(mimetype='text/csv')
-    response['Content-Disposition'] = 'attachment; filename=%s.csv' % unicode(opts).replace('.', '_')
-    writer = csv.writer(response)
+    pseudo_buffer = Echo()
+    writer = csv.writer(pseudo_buffer)
     field_names = [field.name for field in opts.fields]
     # Write a first row with header information
     writer.writerow(field_names)
     # Write data rows
-    for obj in queryset:
-        writer.writerow([getattr(obj, field) for field in field_names])
+
+    response = StreamingHttpResponse((writer.writerow([getattr(obj, field) for field in field_names]) for obj in queryset),
+            content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=%s.csv' % unicode(opts).replace('.', '_')
+
     return response
+
 export_as_csv.short_description = "Export selected objects as csv file"
 
 
