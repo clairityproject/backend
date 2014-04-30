@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from data.models import DataPoint, Met, Alphasense, Dylos, AQI, Node, Latest
 import json
 import datetime
+import time
 
 #------------------------------------------------------------
 #  Post Entries for the coding team
@@ -272,3 +273,45 @@ def get_latest_now_fix(request):
         results.append(d)
 
     return HttpResponse(json.dumps(results), content_type="application/json", status=200)
+
+@csrf_exempt
+def graph_data(request):
+    if request.method == 'GET':
+        sensor = request.GET.get('sensor')
+        node_id = request.GET.get('node_id')
+        if sensor and node_id:
+            if sensor.lower() == 'dylossmall':
+                return HttpResponse(
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b+c+d] for a,b,c,d,e in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','dylos_bin_1', 'dylos_bin_2','dylos_bin_3','dylos_bin_4').iterator()]) ,
+                            content_type="application/json", 
+                            status=200)
+
+            if sensor.lower() == 'dylosbig':
+                return HttpResponse(
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),e] for a,b,c,d,e in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','dylos_bin_1', 'dylos_bin_2','dylos_bin_3','dylos_bin_4').iterator()]) ,
+                            content_type="application/json", 
+                            status=200)
+            elif sensor.lower() == 'no':
+               return HttpResponse(
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','alphasense_7').iterator()]) ,
+                            content_type="application/json", 
+                            status=200)
+            elif sensor.lower() == 'no2':
+               return HttpResponse(
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','alphasense_7').iterator()]) ,
+                            content_type="application/json", 
+                            status=200)
+            elif sensor.lower() == 'o3':
+               return HttpResponse(
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','alphasense_7').iterator()]) ,
+                            content_type="application/json", 
+                            status=200)
+
+            elif sensor.lower() == 'co':
+               return HttpResponse(
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','alphasense_7').iterator()]) ,
+                            content_type="application/json", 
+                            status=200)
+
+    return HttpResponse('No Match')
+
