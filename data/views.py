@@ -282,13 +282,13 @@ def graph_data(request):
         if sensor and node_id:
             if sensor.lower() == 'dylossmall':
                 return HttpResponse(
-                        json.dumps([[int(time.mktime(a.timetuple())*1000),b+c+d] for a,b,c,d,e in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','dylos_bin_1', 'dylos_bin_2','dylos_bin_3','dylos_bin_4').iterator()]) ,
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b+c+d] for a,b,c,d in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','dylos_bin_1', 'dylos_bin_2','dylos_bin_3').iterator()]) ,
                             content_type="application/json", 
                             status=200)
 
             if sensor.lower() == 'dylosbig':
                 return HttpResponse(
-                        json.dumps([[int(time.mktime(a.timetuple())*1000),e] for a,b,c,d,e in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','dylos_bin_1', 'dylos_bin_2','dylos_bin_3','dylos_bin_4').iterator()]) ,
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on', 'dylos_bin_4').iterator()]) ,
                             content_type="application/json", 
                             status=200)
             elif sensor.lower() == 'no':

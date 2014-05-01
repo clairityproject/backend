@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, include, url, handler404, handler500
 from website.views import index
 
 import data.urls as dataurls
@@ -43,3 +43,6 @@ urlpatterns = patterns('',
 
     url(r'^graph/all','data.views.graph_data'),
 )
+
+handler500 = 'website.views.my_custom_error_view'
+handler404 = 'website.views.my_custom_error_view'

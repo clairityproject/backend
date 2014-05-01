@@ -20,11 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'j5_2%tes=mq$hxwo&@ohha@=xxh4$os&b%lj!7mse4y9i76mug'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -99,7 +100,6 @@ TASTYPIE_DEFAULT_FORMATS = ['json']
 TWILIO_ACC_SID = ""
 TWILIO_AUTH_TOKEN = ""
 TWILIO_FROM = ""
-
 
 # override settings locally.
 try:
