@@ -5,6 +5,8 @@ from data.models import DataPoint, Met, Alphasense, Dylos, AQI, Node, Latest
 import json
 import datetime
 import time
+from admin import export_as_csv
+from django.contrib.admin import ModelAdmin
 
 #------------------------------------------------------------
 #  Post Entries for the coding team
@@ -286,7 +288,7 @@ def graph_data(request):
                             content_type="application/json", 
                             status=200)
 
-            if sensor.lower() == 'dylosbig':
+            elif sensor.lower() == 'dylosbig':
                 return HttpResponse(
                         json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on', 'dylos_bin_4').iterator()]) ,
                             content_type="application/json", 
@@ -315,3 +317,33 @@ def graph_data(request):
 
     return HttpResponse('No Match')
 
+
+
+@csrf_exempt
+def download_csv(request):
+    #def export_as_csv(modeladmin, request, queryset):
+    if request.method == 'GET':
+        print request.GET
+        sensor = request.GET.get('sensor')
+        nodes= [int(x) for x in request.GET.get('node_ids').split(',')]
+        modeladmin = None
+        queryset = None
+        print " NOdes " , nodes , " sensor " ,sensor
+        if sensor and nodes:
+            if sensor.lower() == 'dylossmall':
+                modeladmin = ModelAdmin(Dylos, None)
+            elif sensor.lower() == 'dylosbig':
+                modeladmin = ModelAdmin(Dylos, None)
+            elif sensor.lower() == 'no':
+                modeladmin = ModelAdmin(Alphasense, None)
+            elif sensor.lower() == 'no2':
+                modeladmin = ModelAdmin(Alphasense, None)
+            elif sensor.lower() == 'o3':
+                modeladmin = ModelAdmin(Alphasense, None)
+            elif sensor.lower() == 'co':
+                modeladmin = ModelAdmin(Alphasense, None)
+            else:
+                modeladmin = ModelAdmin(Dylos, None)
+        queryset = modeladmin.model.objects.filter(node_id__in=nodes)
+        return export_as_csv(modeladmin , request, queryset)
+    return HttpResponse('An error occurred.')

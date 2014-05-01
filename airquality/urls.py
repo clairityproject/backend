@@ -39,9 +39,8 @@ urlpatterns = patterns('',
     url(r'^latest/hour/$', 'data.views.get_latest', {'hour':True} ),
     url(r'^latest/day/$', 'data.views.get_latest', {'day':True} ),
     url(r'^latest/week/$', 'data.views.get_latest', {'week':True} ),
-
-
     url(r'^graph/all','data.views.graph_data'),
+    url(r'^download/csv/', 'data.views.download_csv'),
 )
 
 handler500 = 'website.views.my_custom_error_view'

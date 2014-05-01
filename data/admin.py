@@ -27,8 +27,8 @@ def export_as_csv(modeladmin, request, queryset):
                 yield row
 
 
-    if not request.user.is_staff:
-        raise PermissionDenied
+    #if not request.user.is_staff:
+        #raise PermissionDenied
 
     pseudo_buffer = Echo()
     writer = csv.writer(pseudo_buffer)
