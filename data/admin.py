@@ -4,7 +4,7 @@ import csv
 from django.core.exceptions import PermissionDenied
 from django.http import StreamingHttpResponse
 import itertools
-
+from datetime import datetime
 class Echo(object):
     """An object that implements just the write method of the file-like
     interface.
@@ -36,7 +36,7 @@ def export_as_csv(modeladmin, request, queryset):
     # Write data rows
 
     response = StreamingHttpResponse(csvgen(), content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename=%s.csv' % unicode(opts).replace('.', '_')
+    response['Content-Disposition'] = 'attachment; filename=%s-%s.csv' % (unicode(opts).replace('.', '_'), str(datetime.now()).replace(' ','_'))
 
     return response
 

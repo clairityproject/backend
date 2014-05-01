@@ -323,9 +323,8 @@ def graph_data(request):
 def download_csv(request):
     #def export_as_csv(modeladmin, request, queryset):
     if request.method == 'GET':
-        print request.GET
         sensor = request.GET.get('sensor')
-        nodes= [int(x) for x in request.GET.get('node_ids').split(',')]
+        nodes= [int(x) for x in request.GET.get('node_ids').split(',')] if request.GET.get('node_ids') else [] 
         modeladmin = None
         queryset = None
         print " NOdes " , nodes , " sensor " ,sensor
@@ -344,6 +343,9 @@ def download_csv(request):
                 modeladmin = ModelAdmin(Alphasense, None)
             else:
                 modeladmin = ModelAdmin(Dylos, None)
-        queryset = modeladmin.model.objects.filter(node_id__in=nodes)
-        return export_as_csv(modeladmin , request, queryset)
-    return HttpResponse('An error occurred.')
+
+            queryset = modeladmin.model.objects.filter(node_id__in=nodes)
+            return export_as_csv(modeladmin , request, queryset)
+    return HttpResponse('An error occurred.',
+            content_type="application/json", 
+            status=400 )
