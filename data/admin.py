@@ -85,8 +85,11 @@ class AlphasenseAdmin(BaseAdmin):
 class MetAdmin(BaseAdmin):
     list_display = ('node_id', 'rh', 'temperature', 'reading_time', 'added_on')
 
+class NodeAdmin(BaseAdmin):
+    list_display = ('node_id','name','indoor', 'latitude', 'longitude')
 
-admin.site.register(Node, BaseAdmin)
+
+admin.site.register(Node, NodeAdmin)
 #admin.site.register(DataPoint, BaseAdmin)
 admin.site.register(AQI, BaseAdmin)
 
