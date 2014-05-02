@@ -58,6 +58,11 @@ def secret_post_dylos(request):
         status = 200
 
         try:
+            if ((int(float(request.POST.get('dylos_bin_1')) == -9999)) or
+                    (int(float(request.POST.get('dylos_bin_2')) == -9999)) or
+                    (int(float(request.POST.get('dylos_bin_3')) == -9999)) or
+                    (int(float(request.POST.get('dylos_bin_4')) == -9999))):
+                raise Exception('invalid entry -9999')
 
             point = Dylos(
                     node_id = request.POST.get('node_id'),
@@ -101,6 +106,7 @@ def secret_post_dylos(request):
 
 @csrf_exempt
 def secret_post_alphasense(request):
+    print "posting alphasense", request.POST
     response_data = {}
     status = 400
     if request.method == "POST":
@@ -109,6 +115,15 @@ def secret_post_alphasense(request):
         status = 200
 
         try:
+            if ((int(float(request.POST.get('alphasense_1')) == -9999)) or
+                    (int(float(request.POST.get('alphasense_2')) == -9999)) or
+                    (int(float(request.POST.get('alphasense_3')) == -9999)) or
+                    (int(float(request.POST.get('alphasense_4')) == -9999)) or
+                    (int(float(request.POST.get('alphasense_5')) == -9999)) or
+                    (int(float(request.POST.get('alphasense_6')) == -9999)) or
+                    (int(float(request.POST.get('alphasense_7')) == -9999)) or
+                    (int(float(request.POST.get('alphasense_8')) == -9999))):
+                raise Exception('invalid entry -9999')
 
             point = Alphasense(
                     node_id = request.POST.get('node_id'),
@@ -165,6 +180,9 @@ def secret_post_met(request):
         status = 200
 
         try:
+            if ((int(float(request.POST.get('temperature')) == -9999)) or
+                    (int(float(request.POST.get('rh')) == -9999))):
+                raise Exception('invalid entry -9999')
 
             point = Met(
                     node_id = request.POST.get('node_id'),
@@ -285,34 +303,34 @@ def graph_data(request):
             if sensor.lower() == 'dylossmall':
                 return HttpResponse(
                         json.dumps([[int(time.mktime(a.timetuple())*1000),b+c+d] for a,b,c,d in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','dylos_bin_1', 'dylos_bin_2','dylos_bin_3').iterator()]) ,
-                            content_type="application/json", 
+                            content_type="application/json",
                             status=200)
 
             elif sensor.lower() == 'dylosbig':
                 return HttpResponse(
                         json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on', 'dylos_bin_4').iterator()]) ,
-                            content_type="application/json", 
+                            content_type="application/json",
                             status=200)
             elif sensor.lower() == 'no':
                return HttpResponse(
                         json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','alphasense_7').iterator()]) ,
-                            content_type="application/json", 
+                            content_type="application/json",
                             status=200)
             elif sensor.lower() == 'no2':
                return HttpResponse(
                         json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','alphasense_7').iterator()]) ,
-                            content_type="application/json", 
+                            content_type="application/json",
                             status=200)
             elif sensor.lower() == 'o3':
                return HttpResponse(
                         json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','alphasense_7').iterator()]) ,
-                            content_type="application/json", 
+                            content_type="application/json",
                             status=200)
 
             elif sensor.lower() == 'co':
                return HttpResponse(
                         json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','alphasense_7').iterator()]) ,
-                            content_type="application/json", 
+                            content_type="application/json",
                             status=200)
 
     return HttpResponse('No Match')
@@ -324,7 +342,7 @@ def download_csv(request):
     #def export_as_csv(modeladmin, request, queryset):
     if request.method == 'GET':
         sensor = request.GET.get('sensor')
-        nodes= [int(x) for x in request.GET.get('node_ids').split(',')] if request.GET.get('node_ids') else [] 
+        nodes= [int(x) for x in request.GET.get('node_ids').split(',')] if request.GET.get('node_ids') else []
         modeladmin = None
         queryset = None
         print " NOdes " , nodes , " sensor " ,sensor
@@ -347,5 +365,5 @@ def download_csv(request):
             queryset = modeladmin.model.objects.filter(node_id__in=nodes)
             return export_as_csv(modeladmin , request, queryset)
     return HttpResponse('An error occurred.',
-            content_type="application/json", 
+            content_type="application/json",
             status=400 )
