@@ -1,5 +1,5 @@
 from django.contrib import admin
-from data.models import  Node, DataPoint, AQI, Dylos, Alphasense, Met, Latest
+from data.models import  Node, DataPoint, Dylos, Alphasense, Met, Latest, SensorDetail
 import csv
 from django.core.exceptions import PermissionDenied
 from django.http import StreamingHttpResponse
@@ -55,23 +55,23 @@ class BaseAdmin(admin.ModelAdmin):
 class  LatestAdmin(BaseAdmin):
     list_display = ['node_id',
             'name',
-            'indoor',        
-            'latitude',      
-            'longitude',     
-            'temperature',   
-            'rh',            
-            'dylos_bin_1',   
-            'dylos_bin_2',   
-            'dylos_bin_3',   
-            'dylos_bin_4',   
-            'alphasense_1',  
-            'alphasense_2',  
-            'alphasense_3',  
-            'alphasense_4',  
-            'alphasense_5',  
-            'alphasense_6',  
-            'alphasense_7',  
-            'alphasense_8',  
+            'indoor',
+            'latitude',
+            'longitude',
+            'temperature',
+            'rh',
+            'dylos_bin_1',
+            'dylos_bin_2',
+            'dylos_bin_3',
+            'dylos_bin_4',
+            'alphasense_1',
+            'alphasense_2',
+            'alphasense_3',
+            'alphasense_4',
+            'alphasense_5',
+            'alphasense_6',
+            'alphasense_7',
+            'alphasense_8',
             'last_modified']
     list_filter = ('last_modified','indoor')
 
@@ -88,10 +88,13 @@ class MetAdmin(BaseAdmin):
 class NodeAdmin(BaseAdmin):
     list_display = ('node_id','name','indoor', 'latitude', 'longitude')
 
+class SensorDetailAdmin(admin.ModelAdmin):
+    list_display = ('node_id',)
 
 admin.site.register(Node, NodeAdmin)
 #admin.site.register(DataPoint, BaseAdmin)
-admin.site.register(AQI, BaseAdmin)
+#admin.site.register(AQI, BaseAdmin)
+admin.site.register(SensorDetail, SensorDetailAdmin)
 
 admin.site.register(Dylos, DylosAdmin)
 admin.site.register(Alphasense, AlphasenseAdmin)

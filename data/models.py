@@ -72,16 +72,26 @@ class DataPoint(models.Model):
 
 class Dylos(models.Model):
     node_id = models.IntegerField(blank=False, null=False, db_index=True)
-    dylos_bin_1 = models.FloatField(blank=True, null=True)
-    dylos_bin_2 = models.FloatField(blank=True, null=True)
-    dylos_bin_3 = models.FloatField(blank=True, null=True)
-    dylos_bin_4 = models.FloatField(blank=True, null=True)
+    dylos_bin_1 = models.IntegerField(blank=True, null=True)
+    dylos_bin_2 = models.IntegerField(blank=True, null=True)
+    dylos_bin_3 = models.IntegerField(blank=True, null=True)
+    dylos_bin_4 = models.IntegerField(blank=True, null=True)
+
+    big_particles = models.IntegerField(blank=True, null=True)
+    small_particles = models.IntegerField(blank=True, null=True)
+
     added_on = models.DateTimeField(auto_now_add=True, db_index=True)
     last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
     reading_time = models.DateTimeField(blank=True, null=True)
 
     def __unicode__(self):
         return str(self.node_id) + ", " + str([self.dylos_bin_1 , self.dylos_bin_2, self.dylos_bin_3, self.dylos_bin_4])
+
+    def save(self, *args, **kwargs):
+        self.big_particles = int(self.dylos_bin_1) + int(self.dylos_bin_2) + int(self.dylos_bin_3)
+        self.small_particles = self.dylos_bin_4
+        super(Dylos, self).save(*args, **kwargs)
+
 
 class Alphasense(models.Model):
     node_id = models.IntegerField(blank=False, null=False, db_index=True)
@@ -93,12 +103,35 @@ class Alphasense(models.Model):
     alphasense_6 = models.FloatField(blank=True, null=True)
     alphasense_7 = models.FloatField(blank=True, null=True)
     alphasense_8 = models.FloatField(blank=True, null=True)
+
+    no = models.FloatField(blank=True, null=True)
+    no2 = models.FloatField(blank=True, null=True)
+    co = models.FloatField(blank=True, null=True)
+    o3 = models.FloatField(blank=True, null=True)
+
     added_on = models.DateTimeField(auto_now_add=True, db_index=True)
     last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
     reading_time = models.DateTimeField(blank=True, null=True)
 
     def __unicode__(self):
-        return str(self.node_id) + ", " + str([self.alphasense_1, self.alphasense_2, self.alphasense_3, self.alphasense_4, self.alphasense_5, self.alphasense_6, self.alphasense_7, self.alphasense_8]) 
+        return str(self.node_id) + ", " + str([self.alphasense_1, self.alphasense_2, self.alphasense_3, self.alphasense_4, self.alphasense_5, self.alphasense_6, self.alphasense_7, self.alphasense_8])
+
+    def save(self, *args, **kwargs):
+        try:
+            sd = SensorDetail.objects.get(node_id=int(self.node_id))
+            # no
+            self.no = ((float(self.alphasense_1)- sd.no_total_we_zero) - (float(self.alphasense_2)- sd.no_total_aux_zero))/sd.no_total_we_sens
+            # o3
+            self.o3 = ((float(self.alphasense_3)- sd.o3_total_we_zero) - (float(self.alphasense_4)- sd.o3_total_aux_zero))/sd.o3_total_we_sens
+            # co
+            self.co = ((float(self.alphasense_5)- sd.co_total_we_zero) - (float(self.alphasense_6)- sd.co_total_aux_zero))/sd.co_total_we_sens
+            # no2
+            self.no2 = ((float(self.alphasense_7)- sd.no2_total_we_zero) - (float(self.alphasense_8)- sd.no2_total_aux_zero))/sd.no2_total_we_sens
+        except Exception as e:
+            print "ERROR saving alpha-sense : node_id = ", self.node_id
+            print str(e)
+            pass
+        super(Alphasense, self).save(*args, **kwargs)
 
 
 class Met(models.Model):
@@ -112,33 +145,6 @@ class Met(models.Model):
 
     def __unicode__(self):
         return str(self.node_id) + ", " + str([self.temperature , self.rh])
-
-class AQI(models.Model):
-    """ This is where data is stored after processing"""
-    node_id = models.IntegerField(blank=False, null=False, db_index=True)
-    no = models.FloatField(blank=True, null=True)
-    no2 = models.FloatField(blank=True, null=True)
-    o3 = models.FloatField(blank=True, null=True)
-    co = models.FloatField(blank=True, null=True)
-    dylos_bin_1 = models.FloatField(blank=True, null=True)
-    dylos_bin_2 = models.FloatField(blank=True, null=True)
-    dylos_bin_3 = models.FloatField(blank=True, null=True)
-    dylos_bin_4 = models.FloatField(blank=True, null=True)
-    mitaqi = models.FloatField(blank=True, null=True)
-    no_rank = models.IntegerField(blank=True, null=True)
-    no2_rank = models.IntegerField(blank=True, null=True)
-    o3_rank = models.IntegerField(blank=True, null=True)
-    co_rank = models.IntegerField(blank=True, null=True)
-    dylos_bin_1_rank = models.IntegerField(blank=True, null=True)
-    dylos_bin_2_rank = models.IntegerField(blank=True, null=True)
-    dylos_bin_3_rank = models.IntegerField(blank=True, null=True)
-    dylos_bin_4_rank = models.IntegerField(blank=True, null=True)
-    mitaqi_rank = models.IntegerField(blank=True, null=True)
-    added_on = models.DateTimeField(auto_now_add=True, db_index=True)
-    last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)
-
-    def __unicode__(self):
-        return str(self.node_id) + ", " + self.mitaqi_rank
 
 
 class SensorDetail(models.Model):

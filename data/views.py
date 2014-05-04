@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
-from data.models import DataPoint, Met, Alphasense, Dylos, AQI, Node, Latest
+from data.models import DataPoint, Met, Alphasense, Dylos, Node, Latest
 import json
 import datetime
 import time
@@ -228,42 +228,6 @@ def secret_post_met(request):
 #------------------------------------------------------------
 
 @csrf_exempt
-def get_latest(request, hour=False,  day=False, week=False):
-    if week or day or hour:
-        end_date = datetime.datetime.now()
-        if week:
-            start_date = end_date - datetime.timedelta(days=7)
-        elif day:
-            start_date = end_date - datetime.timedelta(hours=24)
-        else:
-            # past hour
-            start_date = end_date - datetime.timedelta(minutes=60)
-
-        # return current latest
-        node_ids = range(1,26)
-        results = []
-
-        for node_id in node_ids:
-            latest = AQI.objects.filter(node_id=node_id).filter(added_on__range=(start_date, end_date))
-            if latest:
-                results.extend(latest)
-        return HttpResponse(json.dumps(results), content_type="application/json", status=200)
-
-    else:
-        # return current latest single element
-        node_ids = range(1,26)
-        results = []
-        for node_id in node_ids:
-            try:
-                latest = AQI.objects.filter(node_id=node_id).latest('id')
-                if latest:
-                    results.append(latest)
-            except:
-                pass
-        return HttpResponse(json.dumps(results), content_type="application/json", status=200)
-
-
-@csrf_exempt
 def get_latest_now_fix(request):
     nodes = Latest.objects.all()
     results = []
@@ -339,7 +303,6 @@ def graph_data(request):
 
 @csrf_exempt
 def download_csv(request):
-    #def export_as_csv(modeladmin, request, queryset):
     if request.method == 'GET':
         sensor = request.GET.get('sensor')
         nodes= [int(x) for x in request.GET.get('node_ids').split(',')] if request.GET.get('node_ids') else []
