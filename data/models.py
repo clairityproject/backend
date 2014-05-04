@@ -146,7 +146,6 @@ class Met(models.Model):
     def __unicode__(self):
         return str(self.node_id) + ", " + str([self.temperature , self.rh])
 
-
 class SensorDetail(models.Model):
     node_id = models.IntegerField(blank=False, null=False, db_index=True)
 

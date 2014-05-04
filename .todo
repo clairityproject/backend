@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<todo version="0.1.20">
+    <note priority="medium" time="1399234985">
+        change save() in data models to remove extra db call
+    </note>
+    <note priority="low" time="1399234935">
+        add cache
+    </note>
+</todo>
