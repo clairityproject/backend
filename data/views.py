@@ -232,18 +232,12 @@ def get_latest_now_fix(request):
         d['longitude'] = lnode.longitude
         d['temperature'] = lnode.temperature
         d['rh'] = lnode.rh
-        d['dylos_bin_1'] = lnode.dylos_bin_1
-        d['dylos_bin_2'] = lnode.dylos_bin_2
-        d['dylos_bin_3'] = lnode.dylos_bin_3
-        d['dylos_bin_4'] = lnode.dylos_bin_4
-        d['alphasense_1'] = lnode.alphasense_1
-        d['alphasense_2'] = lnode.alphasense_2
-        d['alphasense_3'] = lnode.alphasense_3
-        d['alphasense_4'] = lnode.alphasense_4
-        d['alphasense_5'] = lnode.alphasense_5
-        d['alphasense_6'] = lnode.alphasense_6
-        d['alphasense_7'] = lnode.alphasense_7
-        d['alphasense_8'] = lnode.alphasense_8
+        d['no'] = lnode.no
+        d['no2'] = lnode.no2
+        d['o3'] = lnode.o3
+        d['co'] = lnode.co
+        d['big_particles'] = lnode.big_particles
+        d['small_particles'] = lnode.small_particles
         d['last_modified'] = str(lnode.last_modified)
         results.append(d)
 
