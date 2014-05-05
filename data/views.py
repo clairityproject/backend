@@ -85,8 +85,8 @@ def secret_post_dylos(request):
                     ltst.longitude = n.longitude
                     ltst.indoor = n.indoor
 
-                ltst.big_particles = point.big_particles
-                ltst.small_particles = point.small_particles
+                ltst.big_particles = point.big_particles * 100
+                ltst.small_particles = point.small_particles * 100
 
                 ltst.save()
             except:
@@ -145,10 +145,10 @@ def secret_post_alphasense(request):
                     ltst.longitude = n.longitude
                     ltst.indoor = n.indoor
 
-                ltst.no = point.no
-                ltst.no2 = point.no2
-                ltst.co = point.co
-                ltst.o3 = point.o3
+                ltst.no = point.no * 1000
+                ltst.no2 = point.no2 * 1000
+                ltst.co = point.co * 1000
+                ltst.o3 = point.o3 * 1000
                 ltst.save()
 
             except:
