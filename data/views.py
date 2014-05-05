@@ -85,14 +85,9 @@ def secret_post_dylos(request):
                     ltst.longitude = n.longitude
                     ltst.indoor = n.indoor
 
-                ltst.dylos_bin_1 =ltst.dylos_bin_1
-                ltst.dylos_bin_2 =ltst.dylos_bin_2
-                ltst.dylos_bin_3 =ltst.dylos_bin_3
-                ltst.dylos_bin_4 =ltst.dylos_bin_4
-                ltst.dylos_bin_5 =ltst.dylos_bin_5
-                ltst.dylos_bin_6 =ltst.dylos_bin_6
-                ltst.dylos_bin_7 =ltst.dylos_bin_7
-                ltst.dylos_bin_8 =ltst.dylos_bin_8
+                ltst.big_particles = point.big_particles
+                ltst.small_particles = point.small_particles
+
                 ltst.save()
             except:
                 pass
@@ -150,14 +145,10 @@ def secret_post_alphasense(request):
                     ltst.longitude = n.longitude
                     ltst.indoor = n.indoor
 
-                ltst.alphasense_1 = point.alphasense_1
-                ltst.alphasense_2 = point.alphasense_2
-                ltst.alphasense_3 = point.alphasense_3
-                ltst.alphasense_4 = point.alphasense_4
-                ltst.alphasense_5 = point.alphasense_5
-                ltst.alphasense_6 = point.alphasense_6
-                ltst.alphasense_7 = point.alphasense_7
-                ltst.alphasense_8 = point.alphasense_8
+                ltst.no = point.no
+                ltst.no2 = point.no2
+                ltst.co = point.co
+                ltst.o3 = point.o3
                 ltst.save()
 
             except:
