@@ -83,8 +83,8 @@ class Dylos(models.Model):
         return str(self.node_id) + ", " + str([self.dylos_bin_1 , self.dylos_bin_2, self.dylos_bin_3, self.dylos_bin_4])
 
     def save(self, *args, **kwargs):
-        self.big_particles = int(self.dylos_bin_1) + int(self.dylos_bin_2) + int(self.dylos_bin_3)
-        self.small_particles = self.dylos_bin_4
+        self.small_particles = int(self.dylos_bin_1) + int(self.dylos_bin_2) + int(self.dylos_bin_3)
+        self.big_particles = int(self.dylos_bin_4)
         super(Dylos, self).save(*args, **kwargs)
 
 
