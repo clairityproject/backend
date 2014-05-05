@@ -60,18 +60,10 @@ class  LatestAdmin(BaseAdmin):
             'longitude',
             'temperature',
             'rh',
-            'dylos_bin_1',
-            'dylos_bin_2',
-            'dylos_bin_3',
-            'dylos_bin_4',
-            'alphasense_1',
-            'alphasense_2',
-            'alphasense_3',
-            'alphasense_4',
-            'alphasense_5',
-            'alphasense_6',
-            'alphasense_7',
-            'alphasense_8',
+            'no',
+            'no2',
+            'o3',
+            'co',
             'last_modified']
     list_filter = ('last_modified','indoor')
 
