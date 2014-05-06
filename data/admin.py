@@ -18,10 +18,11 @@ def export_as_csv(modeladmin, request, queryset):
     Generic csv export admin action.
     """
     opts = modeladmin.model._meta
-    field_names = [field.verbose_name for field in opts.fields]
+    title_names = [field.verbose_name for field in opts.fields]
+    field_names = [field.name for field in opts.fields]
 
     def csvgen():
-            yield writer.writerow(field_names)
+            yield writer.writerow(title_names)
             gen = (writer.writerow([getattr(obj, field) for field in field_names]) for obj in queryset.iterator())
             for row in gen:
                 yield row
