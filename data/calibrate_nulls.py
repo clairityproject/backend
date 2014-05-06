@@ -44,16 +44,16 @@ for nnum in xrange(1, 26):
         _id,node_id,alphasense_1,alphasense_2,alphasense_3,alphasense_4,alphasense_5,alphasense_6,alphasense_7,alphasense_8 = x
         # multiplications by 1000 are conversions from ppm -> ppb
         # no
-        no = ((alphasense_1- no_electronic_we_zero) - ((alphasense_2)- no_electronic_aux_zero))/no_electronic_we_sens
+        no = ((alphasense_1- no_electronic_we_zero) - ((alphasense_2)- no_electronic_aux_zero))/no_total_we_sens
         no = no * 1000
         # o3
-        o3 = (((alphasense_3)- o3_electronic_we_zero) - ((alphasense_4)- o3_electronic_aux_zero))/o3_electronic_we_sens
+        o3 = (((alphasense_3)- o3_electronic_we_zero) - ((alphasense_4)- o3_electronic_aux_zero))/o3_total_we_sens
         o3 = o3 * 1000
         # co
-        co = (((alphasense_5)- co_electronic_we_zero) - ((alphasense_6)- co_electronic_aux_zero))/co_electronic_we_sens
+        co = (((alphasense_5)- co_electronic_we_zero) - ((alphasense_6)- co_electronic_aux_zero))/co_total_we_sens
         co = co * 1000
         # no2
-        no2 = (((alphasense_7)- no2_electronic_we_zero) - ((alphasense_8)- no2_electronic_aux_zero))/no2_electronic_we_sens
+        no2 = (((alphasense_7)- no2_electronic_we_zero) - ((alphasense_8)- no2_electronic_aux_zero))/no2_total_we_sens
         no2 = no2 * 1000
 
         c2.execute("update data_alphasense set no=%s, o3=%s, co=%s, no2=%s where id=%s",(no,o3,co,no2,_id))
