@@ -99,10 +99,10 @@ class Alphasense(models.Model):
     alphasense_7 = models.FloatField(blank=True, null=True)
     alphasense_8 = models.FloatField(blank=True, null=True)
 
-    no = models.FloatField(blank=True, null=True)
-    no2 = models.FloatField(blank=True, null=True)
-    co = models.FloatField(blank=True, null=True)
-    o3 = models.FloatField(blank=True, null=True)
+    no = models.FloatField(blank=True, null=True, verbose_name="NO (ppb)")
+    no2 = models.FloatField(blank=True, null=True, verbose_name="NO2 (ppb)")
+    co = models.FloatField(blank=True, null=True, verbose_name="CO (ppb)")
+    o3 = models.FloatField(blank=True, null=True, verbose_name="O3 (ppb)")
 
     added_on = models.DateTimeField(auto_now_add=True, db_index=True)
     last_modified = models.DateTimeField(auto_now_add=True, auto_now=True)

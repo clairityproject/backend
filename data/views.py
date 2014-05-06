@@ -85,8 +85,8 @@ def secret_post_dylos(request):
                     ltst.longitude = n.longitude
                     ltst.indoor = n.indoor
 
-                ltst.big_particles = point.big_particles * 100
-                ltst.small_particles = point.small_particles * 100
+                ltst.big_particles = point.big_particles
+                ltst.small_particles = point.small_particles
 
                 ltst.save()
             except:
@@ -251,34 +251,34 @@ def graph_data(request):
         if sensor and node_id:
             if sensor.lower() == 'dylossmall':
                 return HttpResponse(
-                        json.dumps([[int(time.mktime(a.timetuple())*1000),b+c+d] for a,b,c,d in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','dylos_bin_1', 'dylos_bin_2','dylos_bin_3').iterator()]) ,
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','small_particles').iterator()]) ,
                             content_type="application/json",
                             status=200)
 
             elif sensor.lower() == 'dylosbig':
                 return HttpResponse(
-                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on', 'dylos_bin_4').iterator()]) ,
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on', 'big_particles').iterator()]) ,
                             content_type="application/json",
                             status=200)
             elif sensor.lower() == 'no':
                return HttpResponse(
-                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','alphasense_7').iterator()]) ,
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','no').iterator()]) ,
                             content_type="application/json",
                             status=200)
             elif sensor.lower() == 'no2':
                return HttpResponse(
-                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','alphasense_7').iterator()]) ,
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','no2').iterator()]) ,
                             content_type="application/json",
                             status=200)
             elif sensor.lower() == 'o3':
                return HttpResponse(
-                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','alphasense_7').iterator()]) ,
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','o3').iterator()]) ,
                             content_type="application/json",
                             status=200)
 
             elif sensor.lower() == 'co':
                return HttpResponse(
-                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','alphasense_7').iterator()]) ,
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','co').iterator()]) ,
                             content_type="application/json",
                             status=200)
 
