@@ -115,13 +115,13 @@ class Alphasense(models.Model):
         try:
             sd = SensorDetail.objects.get(node_id=int(self.node_id))
             # no
-            self.no = ((float(self.alphasense_1)- sd.no_total_we_zero) - (float(self.alphasense_2)- sd.no_total_aux_zero))/sd.no_total_we_sens
+            self.no = ((float(self.alphasense_1)- sd.no_electronic_we_zero) - (float(self.alphasense_2)- sd.no_electronic_aux_zero))/sd.no_electronic_we_sens
             # o3
-            self.o3 = ((float(self.alphasense_3)- sd.o3_total_we_zero) - (float(self.alphasense_4)- sd.o3_total_aux_zero))/sd.o3_total_we_sens
+            self.o3 = ((float(self.alphasense_3)- sd.o3_electronic_we_zero) - (float(self.alphasense_4)- sd.o3_electronic_aux_zero))/sd.o3_electronic_we_sens
             # co
-            self.co = ((float(self.alphasense_5)- sd.co_total_we_zero) - (float(self.alphasense_6)- sd.co_total_aux_zero))/sd.co_total_we_sens
+            self.co = ((float(self.alphasense_5)- sd.co_electronic_we_zero) - (float(self.alphasense_6)- sd.co_electronic_aux_zero))/sd.co_electronic_we_sens
             # no2
-            self.no2 = ((float(self.alphasense_7)- sd.no2_total_we_zero) - (float(self.alphasense_8)- sd.no2_total_aux_zero))/sd.no2_total_we_sens
+            self.no2 = ((float(self.alphasense_7)- sd.no2_electronic_we_zero) - (float(self.alphasense_8)- sd.no2_electronic_aux_zero))/sd.no2_electronic_we_sens
         except Exception as e:
             print "ERROR saving alpha-sense : node_id = ", self.node_id
             print str(e)
