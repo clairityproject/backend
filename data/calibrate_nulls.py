@@ -2,27 +2,39 @@
 import MySQLdb
 import sys
 
-db=MySQLdb.connect(host="localhost", user="root",passwd="manoti", db="clairity_dump")
-c = db.cursor()
-c2 = db.cursor()
-
-# get all dylos
-c.execute("""select id, node_id, dylos_bin_1, dylos_bin_2, dylos_bin_3, dylos_bin_4 from data_dylos where big_particles is null""")
-
-for x in c.fetchall():
-    _id, node_id, dylos1, dylos2, dylos3, dylos4 = x
-    c2.execute("update data_dylos set big_particles=%s, small_particles=%s where id=%s", (dylos1 + dylos2 + dylos3, dylos4, _id))
-    sys.stdout.write('.')
-
-
-
+db=MySQLdb.connect(host="localhost", user="website",passwd="CryShar0", db="cee_website")
+#c = db.cursor()
+#c2 = db.cursor()
+#
+## get all dylos
+#c.execute("""select id, node_id, dylos_bin_1, dylos_bin_2, dylos_bin_3, dylos_bin_4 from data_dylos""")
+#
+#for x in c.fetchall():
+#    _id, node_id, dylos1, dylos2, dylos3, dylos4 = x
+#    c2.execute("update data_dylos set small_particles=%s, big_particles=%s where id=%s", (dylos1 + dylos2 + dylos3, dylos4, _id))
+#    sys.stdout.write('.')
+#
+#print " "
+#print "dylos complete"
+#print "Press key to continue . . . ."
+#sys.stdin.readline()
+#print " "
+#
 c = db.cursor()
 c2 = db.cursor()
 c3 = db.cursor()
 
-for nnum in xrange(26):
-    c.execute("select id,node_id,alphasense_1,alphasense_2,alphasense_3,alphasense_4,alphasense_5,alphasense_6,alphasense_7,alphasense_8 from data_alphasense where no is null and node_id=%s", nnum)
-    c3.execute("select * from data_sensordetail where node_id=%s", nnum)
+for nnum in xrange(1, 26):
+    print nnum
+    try:
+	    c.execute("select id,node_id,alphasense_1,alphasense_2,alphasense_3,alphasense_4,alphasense_5,alphasense_6,alphasense_7,alphasense_8 from data_alphasense where no is null and node_id=%s", (nnum,))
+	    c3.execute("select * from data_sensordetail where node_id=%s", (nnum,))
+
+    except Exception as e:
+        print "An error occured"
+        print str(e)
+        print "stopping alph at node number ", nnum
+        sys.exit(1)
     try:
         ______id, _____node_id, no_serial, o3_serial, no2_serial, co_serial, no_electronic_we_zero, no_total_we_zero, no_electronic_aux_zero, no_total_aux_zero, no_electronic_we_sens, no_total_we_sens, o3_electronic_we_zero, o3_total_we_zero, o3_electronic_aux_zero, o3_total_aux_zero, o3_electronic_we_sens, o3_total_we_sens, no2_electronic_we_zero, no2_total_we_zero, no2_electronic_aux_zero, no2_total_aux_zero, no2_electronic_we_sens, no2_total_we_sens, co_electronic_we_zero, co_total_we_zero, co_electronic_aux_zero, co_total_aux_zero, co_electronic_we_sens, co_total_we_sens = c3.fetchone()
     except:
