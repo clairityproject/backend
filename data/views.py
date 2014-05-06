@@ -145,10 +145,10 @@ def secret_post_alphasense(request):
                     ltst.longitude = n.longitude
                     ltst.indoor = n.indoor
 
-                ltst.no = point.no * 1000
-                ltst.no2 = point.no2 * 1000
-                ltst.co = point.co * 1000
-                ltst.o3 = point.o3 * 1000
+                ltst.no = point.no
+                ltst.no2 = point.no2
+                ltst.co = point.co
+                ltst.o3 = point.o3
                 ltst.save()
 
             except:

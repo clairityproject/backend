@@ -116,18 +116,21 @@ class Alphasense(models.Model):
             sd = SensorDetail.objects.get(node_id=int(self.node_id))
             # no
             self.no = ((float(self.alphasense_1)- sd.no_electronic_we_zero) - (float(self.alphasense_2)- sd.no_electronic_aux_zero))/sd.no_electronic_we_sens
+            self.no = float(self.no) * 1000
             # o3
             self.o3 = ((float(self.alphasense_3)- sd.o3_electronic_we_zero) - (float(self.alphasense_4)- sd.o3_electronic_aux_zero))/sd.o3_electronic_we_sens
+            self.o3 = float(self.o3) * 1000
             # co
             self.co = ((float(self.alphasense_5)- sd.co_electronic_we_zero) - (float(self.alphasense_6)- sd.co_electronic_aux_zero))/sd.co_electronic_we_sens
+            self.co = float(self.co) * 1000
             # no2
             self.no2 = ((float(self.alphasense_7)- sd.no2_electronic_we_zero) - (float(self.alphasense_8)- sd.no2_electronic_aux_zero))/sd.no2_electronic_we_sens
+            self.no2 = float(self.no2) * 1000
         except Exception as e:
             print "ERROR saving alpha-sense : node_id = ", self.node_id
             print str(e)
             pass
         super(Alphasense, self).save(*args, **kwargs)
-
 
 class Met(models.Model):
     ## This is the meteorological class
