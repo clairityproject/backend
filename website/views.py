@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, redirect
 from django.http import HttpResponse
 from forms import DownloadForm
 
@@ -6,7 +6,7 @@ from forms import DownloadForm
 # Create your views here.
 
 def index(request):
-    return render_to_response('in_progress.html')
+    return redirect('http://clairity.mit.edu/site/html/', permanent=True)
 
 def export(request):
     form = DownloadForm()
