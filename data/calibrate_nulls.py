@@ -31,13 +31,13 @@ for nnum in xrange(26):
     for x in c.fetchall():
         _id,node_id,alphasense_1,alphasense_2,alphasense_3,alphasense_4,alphasense_5,alphasense_6,alphasense_7,alphasense_8 = x
         # no
-        no = ((alphasense_1- no_total_we_zero) - ((alphasense_2)- no_total_aux_zero))/no_total_we_sens
+        no = ((alphasense_1- no_electronic_we_zero) - ((alphasense_2)- no_electronic_aux_zero))/no_electronic_we_sens
         # o3
-        o3 = (((alphasense_3)- o3_total_we_zero) - ((alphasense_4)- o3_total_aux_zero))/o3_total_we_sens
+        o3 = (((alphasense_3)- o3_electronic_we_zero) - ((alphasense_4)- o3_electronic_aux_zero))/o3_electronic_we_sens
         # co
-        co = (((alphasense_5)- co_total_we_zero) - ((alphasense_6)- co_total_aux_zero))/co_total_we_sens
+        co = (((alphasense_5)- co_electronic_we_zero) - ((alphasense_6)- co_electronic_aux_zero))/co_electronic_we_sens
         # no2
-        no2 = (((alphasense_7)- no2_total_we_zero) - ((alphasense_8)- no2_total_aux_zero))/no2_total_we_sens
+        no2 = (((alphasense_7)- no2_electronic_we_zero) - ((alphasense_8)- no2_electronic_aux_zero))/no2_electronic_we_sens
 
         c2.execute("update data_alphasense set no=%s, o3=%s, co=%s, no2=%s where id=%s",(no,o3,co,no2,_id))
         sys.stdout.write('.')
