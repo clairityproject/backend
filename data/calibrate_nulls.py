@@ -30,6 +30,7 @@ for nnum in xrange(26):
 
     for x in c.fetchall():
         _id,node_id,alphasense_1,alphasense_2,alphasense_3,alphasense_4,alphasense_5,alphasense_6,alphasense_7,alphasense_8 = x
+        # multiplications by 1000 are conversions from ppm -> ppb
         # no
         no = ((alphasense_1- no_electronic_we_zero) - ((alphasense_2)- no_electronic_aux_zero))/no_electronic_we_sens
         no = no * 1000
