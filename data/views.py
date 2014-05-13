@@ -231,6 +231,7 @@ def get_latest_now_fix(request):
         d['latitude'] = lnode.latitude
         d['longitude'] = lnode.longitude
         d['temperature'] = lnode.temperature
+        d['offline'] = lnode.offline
         d['rh'] = lnode.rh
         d['no'] = lnode.no
         d['no2'] = lnode.no2
