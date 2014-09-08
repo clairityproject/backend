@@ -294,7 +294,7 @@ def download_csv(request):
         nodes= [int(x) for x in request.GET.get('node_ids').split(',')] if request.GET.get('node_ids') else []
         modeladmin = None
         queryset = None
-        print " NOdes " , nodes , " sensor " ,sensor
+        print " Nodes " , nodes , " sensor " ,sensor
         if sensor and nodes:
             if sensor.lower() == 'dylossmall':
                 modeladmin = ModelAdmin(Dylos, None)
@@ -312,7 +312,9 @@ def download_csv(request):
                 modeladmin = ModelAdmin(Dylos, None)
 
             queryset = modeladmin.model.objects.filter(node_id__in=nodes)
+
             return export_as_csv(modeladmin , request, queryset)
+
     return HttpResponse('An error occurred.',
             content_type="application/json",
-            status=400 )
+            status=400)

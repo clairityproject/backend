@@ -1,4 +1,7 @@
-backend
-=======
+Backend for clairity.mit.edu
+============================
 
-Back-end for web server built in django
+This is the backend for the course 1 clairity.mit.edu site.
+
+    Built in django
+

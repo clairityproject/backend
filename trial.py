@@ -1,4 +1,6 @@
+""" This builds and prefills the `Latest` objects"""
 from data.models import Latest, Node, Met, Dylos, Alphasense
+
 for n in Node.objects.all():
     print n
     l, cre = Latest.objects.get_or_create(node_id=n.node_id)
@@ -17,7 +19,7 @@ for n in Node.objects.all():
             l.save()
 
     except:
-        print "MET for node ",n.node_id, " failed"
+        print "MET for node ", n.node_id, " failed"
 
     try:
         d = Dylos.objects.filter(node_id=n.node_id).latest('added_on')
@@ -30,19 +32,19 @@ for n in Node.objects.all():
             l.save()
 
     except:
-        print "DYlos ", n.node_id , " fauled " 
+        print "Dylos ", n.node_id, " failed "
     try:
-         al = Alphasense.objects.filter(node_id=n.node_id).latest('added_on')
+        al = Alphasense.objects.filter(node_id=n.node_id).latest('added_on')
 
-         if al:
-             l.alphasense_1 = al.alphasense_1
-             l.alphasense_2 = al.alphasense_2
-             l.alphasense_3 = al.alphasense_3
-             l.alphasense_4 = al.alphasense_4
-             l.alphasense_5 = al.alphasense_5
-             l.alphasense_6 = al.alphasense_6
-             l.alphasense_7 = al.alphasense_7
-             l.alphasense_8 = al.alphasense_8
-             l.save()
+        if al:
+            l.alphasense_1 = al.alphasense_1
+            l.alphasense_2 = al.alphasense_2
+            l.alphasense_3 = al.alphasense_3
+            l.alphasense_4 = al.alphasense_4
+            l.alphasense_5 = al.alphasense_5
+            l.alphasense_6 = al.alphasense_6
+            l.alphasense_7 = al.alphasense_7
+            l.alphasense_8 = al.alphasense_8
+            l.save()
     except:
-         print "alphasense " , n.node_id, "failed"
+        print "alphasense ", n.node_id, "failed"
