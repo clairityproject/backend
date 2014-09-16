@@ -246,40 +246,41 @@ def get_latest_now_fix(request):
 
 @csrf_exempt
 def graph_data(request):
+    last_month = datetime.datetime.today()  - datetime.timedelta(days=30)
     if request.method == 'GET':
         sensor = request.GET.get('sensor')
         node_id = request.GET.get('node_id')
         if sensor and node_id:
             if sensor.lower() == 'dylossmall':
                 return HttpResponse(
-                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','small_particles').iterator()]) ,
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__gte=last_month).values_list('added_on','small_particles').iterator()]) ,
                             content_type="application/json",
                             status=200)
 
             elif sensor.lower() == 'dylosbig':
                 return HttpResponse(
-                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on', 'big_particles').iterator()]) ,
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Dylos.objects.filter(node_id=int(node_id)).filter(added_on__gte=last_month).values_list('added_on', 'big_particles').iterator()]) ,
                             content_type="application/json",
                             status=200)
             elif sensor.lower() == 'no':
                return HttpResponse(
-                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','no').iterator()]) ,
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__gte=last_month).values_list('added_on','no').iterator()]) ,
                             content_type="application/json",
                             status=200)
             elif sensor.lower() == 'no2':
                return HttpResponse(
-                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','no2').iterator()]) ,
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__gte=last_month).values_list('added_on','no2').iterator()]) ,
                             content_type="application/json",
                             status=200)
             elif sensor.lower() == 'o3':
                return HttpResponse(
-                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','o3').iterator()]) ,
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__gte=last_month).values_list('added_on','o3').iterator()]) ,
                             content_type="application/json",
                             status=200)
 
             elif sensor.lower() == 'co':
                return HttpResponse(
-                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__year=datetime.datetime.now().year).values_list('added_on','co').iterator()]) ,
+                        json.dumps([[int(time.mktime(a.timetuple())*1000),b] for a,b in Alphasense.objects.filter(node_id=int(node_id)).filter(added_on__gte=last_month).values_list('added_on','co').iterator()]) ,
                             content_type="application/json",
                             status=200)
 
