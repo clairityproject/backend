@@ -1,0 +1,101 @@
+{% extends 'page.html' %}
+{% load static %}
+
+{% block content %}
+<!-- MAP SECTION -->
+<div class="col-md-3" id="valuesTable">
+    <div class="col-md-3" id="valuesTable" style="padding-top: 24px;">
+        <div id="locationheader">Location</div>
+        <div id="lastupdated">Last Updated</div>
+
+        <table class="table table-condensed" id="pollutants" style="padding-top: 20px">
+            <tr>
+                <td id="coa" class="pollutantName values">CO</td>
+                <td id="cob" class="alpha1 pollutantName pollutantValue values">Blank</td>
+            </tr>	
+            <tr>
+                <td class="pollutantFull">Carbon Monoxide</td>
+                <td class="unitlabel">ppb</td>
+            </tr>
+            <tr>
+                <td id="noa" class="pollutantName values">NO</td>
+                <td id="nob" class="alpha2 pollutantName pollutantValue values">Blank</td>
+            </tr>
+            <tr>
+                <td class="pollutantFull">Nitric Oxide</td>
+                <td class="unitlabel">ppb</td>
+            </tr>
+            <tr>
+                <td id="no2a" class="pollutantName values">NO<sub>2</sub></td>
+                <td id="no2b" class="alpha3 pollutantName pollutantValue values">Blank</td>
+            </tr>
+            <tr>
+                <td class="pollutantFull">Nitrogen Dioxide</td>
+                <td class="unitlabel">ppb</td>
+            </tr>
+            <tr>
+                <td id="o3a" class="pollutantName values">O<sub>3</sub></td>
+                <td id="o3b" class="alpha4 pollutantName pollutantValue values">Blank</td>
+            </tr>
+            <tr>
+                <td class="pollutantFull">Ozone (Uncalibrated)</td>
+                <td class="unitlabel">ppb</td>
+            </tr>
+            <tr>
+                <td id="dylos1" class="pollutantName values">Fine Particles</td>
+                <td id="dylosa" class="pm25 pollutantName pollutantValue values">Blank</td>
+            </tr>
+            <tr>
+                <td class="pollutantFull">Particle Count</td>
+                <td class="unitlabel">per 0.01 ft<sup>3</sup></td>
+            </tr>
+            <tr>
+                <td id="dylos2" class="pollutantName values">Coarse Particles</td>
+                <td id="dylosb" class="pm10 pollutantName pollutantValue values">Blank</td>
+            </tr>
+            <tr>
+                <td class="pollutantFull">Particle Count</td>
+                <td class="unitlabel">per 0.01 ft<sup>3</sup></td>
+            </tr>
+        </table>
+        <div>
+            <p style="font-size: 15px; margin-top: 30px">Click on a location to display air quality data</p>
+            <p style="font-size: 12px; margin-bottom: 55px">Note: Values shown are 10 second averages, and therefore may be influenced by small fluctuations and noise</p>
+        </div>
+    </div>
+</div>
+
+<div id="map">
+    <!--Map Legend-->
+
+    <div id="legend">
+        <div class="sublegend" style="width: 40%">
+            <p style="margin: 10px; font-size: 18px">Legend</p>
+            <div id="legend_container"><img src="{% static 'images/green_legend.png' %}" height="22" width="22"></div>
+            <p style="margin-left: 30px; line-height: 20px">Good</p>
+            <div id="legend_container"><img src="{% static 'images/yellow_legend.png' %}" height="22" width="22"></div>
+            <p style="margin-left: 30px; line-height: 20px">Moderate</p>
+            <div id="legend_container"><img src="{% static 'images/red_legend.png' %}" height="22" width="22"></div>
+            <p style="margin-left: 30px; line-height: 20px">Unhealthy</p>
+            <div id="legend_container"><img src="{% static 'images/nonfunctioning_legend.png' %}" height="22" width="22"></div>
+            <p style="margin-left: 30px; line-height: 20px; vertical-align: center">Offline</p>
+        </div>
+        <div class="sublegend" style="width: 50%; height: 100px; margin-left: 15px; vertical-align: top; margin-top: 45px">
+            <div id="legend_container"><img src="{% static 'images/legend_triangle.png' %}" height="22" width="22"></div>
+            <p style="margin-left: 30px; line-height: 20px">Indoor Nodes</p>
+            <div id="legend_container"><img src="{% static 'images/legend_circle.png' %}" height="22" width="22"></div>
+            <p style="margin-left: 30px; line-height: 20px">Outdoor Nodes</p>
+        </div>
+        <div class="sublegend" style="width: 95%; margin-left: 2.5%; vertical-align: top; margin-top: 5px">
+            <p>Air quality classification derived from EPA and Dylos thresholds for ozone, carbon monoxide, and particle counts</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/leaflet-google.js' %}"></script>
+    <script src="{% static 'js/frontpage.js' %}"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+{% endblock %}

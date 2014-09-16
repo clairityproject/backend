@@ -1,0 +1,559 @@
+{% extends 'page.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Photo Header -->
+<div class="container" style="padding-top:120px">
+    <div class="col-md-12 col-sm-12 team-image-display">
+        <img id="hiw" src="{% static 'images/howitworks_new.jpg' %}">
+    </div>
+
+    <!-- line divider -->
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break-border"></div>
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break"></div>
+
+    <!-- Information about the System --> 
+
+    <div class="row featurette" style="padding-left: 20px; padding-right: 20px; padding-top: 110px">
+        <h2 class="featurette-heading">
+            <font color="#1560ac">What does each node consist of?</font> 
+        </h2>
+        <br>
+        <p class="lead">
+        Each node consists of several parts:
+        </p>
+        <ul>
+            <li class="lead" id="dylosbox">a dylos system</li>
+            <p>Every node has a dylos that consists of a small computer fan, a
+            laser system that measures particulate matter and a screen that
+            displays the results. This original setup was modified to also
+            channel air over a RH/Temp Sensor and through a 3D printed
+            infrastructure that houses the four alphasense sensors.</p>
+            <li class="lead">alphasense sensors</li> 
+            <p>
+            Alphasense sensors are electrochemical sensors that measure the
+            concentration of pollutants. Our sensors include CO, NO, NO2 and O3
+            sensors along with a RH Temperature sensor. 
+            </p>
+            <li class="lead">printed circuit boards</li>
+            <p>
+            The PCB, or printed circuit board, is a mini computer that serves
+            two purposes. It distributed power to various components of the
+            node and communicates the data collected by the alphasense sensors
+            and RH/Temperature sensor to the ADC board.
+            </p>
+            <li class="lead">an analog to digital converter</li>
+            <p>
+            The ADC, or analog to Digital converter, received analog input and
+            then converts it into digital data that the Raspberry Pi can read.
+            </p>
+
+            <li class="lead">a raspberry pi</li> 
+            <p>
+            The Raspberry Pi receives digital data from the ADC board through
+            the ribbon cable. Ultimately, this information is transferred
+            wirelessly to a database. 
+            </p>
+
+        </ul>
+    </div>
+
+    <br><br>
+
+    <!-- NODE SECTION -->
+
+
+    <div id="image_wrap"> 
+        <!-- Initially the image is a simple 1x1 pixel transparent GIF -->
+        <img src="{% static 'images/nodeimg1.jpg' %}" class="caption" data-caption="Main components  of air quality node include electrochemical sensors, Raspberry Pi, PCB board, ADC board, Dylos, and 3D printed case" width="500" height="375" />
+    </div>
+
+
+    <div id="image_wrap">
+        <div style="margin:0 auto; width: 634px; height:120px;">
+            <!--      "previous page" action  -->
+            <a class="prev browse left"></a>
+            <!-- root element for scrollable -->
+
+            <div class="scrollable" id="scrollable">
+
+                <div class="items">
+
+
+                    <div>
+
+                        <img src="{% static 'images/nodeimg1.jpg' %}" data-caption="Main components  of the air quality node include electrochemical sensors, a Raspberry Pi, a PCB board, an ADC board, a Dylos, and a 3D printed case" />
+                        <img src="{% static 'images/nodeimg2.jpg' %}" data-caption="A 3D printer was used to print the protective covering of the air quality nodes"/>
+                        <img src="{% static 'images/nodeimg3.jpg' %}" data-caption="The nodes were calibrated against high fidelity instrumentation to ensure their accuracy"/>
+                        <img src="{% static 'images/nodeimg4.jpg' %}" data-caption="Paula Gonzalez works in the lab to ensure that the nodes are correctly calibrated"/>
+                    </div>
+
+                    <div>
+                        <img src="{% static 'images/nodeimg5.jpg' %}" data-caption="Vanya Britto and Maria Cassidy construct CLAIRITY air quality nodes"/>
+                        <img src="{% static 'images/nodeimg6.jpg' %}" data-caption="A close up view of the electrochemical sensors and the ADC Board in the CLAIRITY node"/>
+                        <img src="{% static 'images/nodeimg7.jpg' %}" data-caption="Carmen Castanos and Zachary Balgobin work on the nodes"/>
+                        <img src="{% static 'images/nodeimg8.jpg' %}" data-caption="A close up of the ADC Board, the PCB Board and our electrochemical sensors. The Raspberry Pi is to the left in the picture"/>
+                    </div>
+
+                    <div>
+                        <img src="{% static 'images/nodeimg9.jpg' %}" data-caption="Tim Wilson solders a circuit board to be placed in a node"/>
+                        <img src="{% static 'images/nodeimg10.jpg' %}" data-caption="Here are several components we used to build our nodes. We engineered commercially available products to fit the requirements of our sensor"/>
+                        <img src="{% static 'images/nodeimg11.jpg' %}" data-caption="This picture displays the 3D printed casing that protects our node. The 3D printed section is able to snap onto the Dylos on the right side"/>
+                        <img src="{% static 'images/nodeimg12.jpg' %}" data-caption="This is the system that was set up to measure our nodes against high fidelity instruments"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- "next page" action -->
+
+            <a class="next browse right"></a>
+        </div>
+    </div>
+
+
+    <!-- 3D Model -->
+
+    <br><br>
+    <div>
+        <h3 style="text-align: left">A 3D Visualization of the Node</h3>
+    </div>
+    <div>
+        <p class="lead">
+        Our sensors include CO, NO, NO2 and O3 sensors along with a RH Temperature sensor. 
+        This 3D visualization let's you see what is inside each node's casing. It represents the Dylos particle sensor, the alphasense sensors, the Raspberry Pi, and the electronic boards. Feel free to rotate and zoom to get a better look!
+        </p>
+    </div>
+
+    <canvas id="cv" width=640 height=480 class="threedvisual" style=" margin-right: auto; margin-left: auto; position: relative; display: block;"></canvas>
+
+
+
+    <!-- line divider -->
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break-border"></div>
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break"></div>
+
+
+
+    <!-- Pollutants Section -->
+    <div class="row featurette" style="padding-left: 20px; padding-right: 20px; padding-top: 80px">
+        <h2 class="featurette-heading">
+            <span class="text-muted">What are we measuring?</span>
+        </h2>
+        <br>
+        <p class="lead">
+        We are measuring five pollutants: nitric oxide, nitrogen dioxide, carbon monoxide, ozone, and particulate matter. The NOx group (nitric oxide and nitrogen dioxide) is emitted from automobiles, power plants, and turbines. Carbon monoxide comes from automobile exhaust and burning fuel. Particulate matter is the result of a wide range of manmade and natural sources, while ozone is the result of reactions between chemicals already in our air.
+        Together, these pollutants paint a comprehensive picture of air quality impacts from the interaction of human activity with natural processes.
+
+        </p>
+    </div>
+
+
+    <!-- Pollutant Descriptions -->
+
+    <!-- POLLUTANTS SECTIONN -->
+
+    <div id="pollutants"></div>
+    <hr>
+    <br><br>
+
+
+
+
+    <!-- first row of pollutants -->
+
+    <!--CARBON MONOXIDE -->
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="{% static 'images/CO.png' %}">
+                <h3>Carbon Monoxide</h3>
+                <p>
+                CO is an odorless, colorless gas that is highly toxic in when
+                encountered in high concentrations! The main contribution of CO
+                is vehicle exhaust but other sources include fuel combustion,
+                fires, and volcanoes. Harmful health effects of CO occur when
+                it enters the bloodstream through the lungs and binds to
+                hemoglobin, reducing the amount of oxygen that reaches the
+                bodys' tissues and organs. 
+                </p>
+                <p>
+                <a class="btn" data-toggle="modal" data-target="#COModal" href="#">Learn More</a>
+                </p>
+            </div>
+        </div>
+        <!-- CO Modal -->
+        <div class="modal fade" id="COModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Carbon Monoxide</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                        What is it?  Carbon monoxide (CO) is an odorless,
+                        colorless, and toxic gas that is often a byproduct of
+                        combustion in gas ranges, automobiles, or unvented
+                        kerosene heaters. CO can also be an important indoor
+                        pollution concern, because it is often produced from
+                        indoor heaters, chimneys and furnaces, fireplaces, and
+                        water heaters. 
+                        </p>
+                        <p>
+                        Why does it matter?  Because carbon monoxide is
+                        difficult to detect and might be a critical indoor
+                        pollution problem, our network is especially useful for
+                        CO detection. At low concentrations, it can cause mild
+                        chest pain in people with heart problems or fatigue in
+                        healthy people. CO can be fatal at high concentrations,
+                        because of its ability to limit oxygen intake in blood.
+                        Other potential issues include angina, impaired vision,
+                        and reduced brain function. 
+                        </p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NITRIC OXIDE -->
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="{% static 'images/NO.png' %}">
+                <h3>Nitric Oxide</h3>
+                <p>
+                Nitric Oxide is colorless and odorless, and of the nitrogen
+                oxides (NOx) emitted, NO is the primary pollutant. While NO is
+                non-toxic by itself, it quickly converts to NO2 in the air. 
+                </p>
+                <p>
+                <a class="btn" data-toggle="modal" data-target="#NOModal" href="#">Learn More</a>
+                </p>
+            </div>
+        </div>
+        <!-- NO Modal -->
+        <div class="modal fade" id="NOModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Nitric Oxide</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                        What is it?  Nitric oxide (NO) is a byproduct of
+                        combustion of air in manmade systems such as automobile
+                        engines and fossil fuel power plants, or in natural
+                        processes such as thunderstorms. NO is a free radical
+                        (it has one unpaired electron), which means that it is
+                        highly unstable and likely rapidly reacts with
+                        surrounding gases. Usually, NO converts into nitrogen
+                        dioxide (NO2), which will enter a complex chain of
+                        reactions that may produce ozone or acid rain. 
+                        </p>
+                        <p>
+                        Why does it matter? NO is not included in the Air
+                        Quality Index (AQI) produced by the Environmental
+                        Protection Agency. However, it is an important
+                        precursor to nitrogen dioxide (NO2), which is known to
+                        have detrimental effects on human respiratory health.
+                        NO2 can also likely produce ozone or acid rain.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NITROGEN DIOXIDE -->
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="{% static 'images/NO2.png' %}">
+                <h3>Nitrogen Dioxide</h3>
+                <p>
+                Nitrogen Dioxide (NO2) is strongly tied to the presence of O3
+                and particulate matter. The largest sources of NO2 are
+                combustion processes, such as heating and power generation.
+                Long-term exposure to NO2 has been linked to adverse
+                respiratory effects. 
+                </p>
+                <p>
+                <a class="btn" data-toggle="modal" data-target="#NO2Modal" href="#">Learn More</a>
+                </p>
+            </div>
+        </div>
+        <!-- NO2 Modal -->
+        <div class="modal fade" id="NO2Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Nitrogen Dioxide</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                        What is it? Nitrogen dioxide (NO2) is a suffocating,
+                        brownish gas that belongs to a family of highly
+                        reactive species known as nitrogen oxides (NOx). NO2 is
+                        usually produced after nitric oxide, which is produced
+                        from automobiles and industrial processes, rapidly
+                        decomposes to NO2. The NOx gases form when fuel is
+                        burned at high temperatures  as a result of motor
+                        vehicle exhaust, electric utilities, and industrial
+                        boilers. NO2 can react with other gases in the
+                        atmosphere to form nitric acid, which leads to acid
+                        rain, and ozone.
+                        </p>
+                        <p> 
+                        Why does it matter?  At moderate levels, NO2 can cause
+                        lung irritation and make one more susceptible to
+                        respiratory illnesses such as influenza. Nitrogen
+                        dioxide, when present for prolonged time periods, can
+                        make children more susceptible to acute respiratory
+                        illness. NO2 can increase acid rain and formation of
+                        zone. Finally, NO2 can result in eutrophication in
+                        waters, which decreases water oxygen and threatens the
+                        livelihood of aquatic wildlife.
+                        </p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- second row of pollutants -->
+<div class="row">
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="{% static 'images/O3.png' %}">
+                <h3>Ozone</h3>
+                <p>
+                Ozone (O3), when found in the upper atmosphere, protects earth
+                from the sun's harmful rays. However, ground level ozone is the
+                main component of smog and can harm our health. This ground
+                level ozone is formed from reactions between nitrogen oxides
+                and volatile organic compounds. 
+                <p>
+                <a class="btn" data-toggle="modal" data-target="#OzoneModal" href="#">Learn More</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Ozone Modal -->
+        <div class="modal fade" id="OzoneModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Ozone</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                        What is it?  Ozone is a gas that occurs both in the upper atmosphere and at ground level. Both regions of ozone have the same chemical makeup: O3. Upper atmospheric ozone protects the earth from UV rays, but ground level ozone can pose a threat. 
+                        Ozone is created by chemical reactions between oxides of nitrogen (NOx) and volatile organic compounds (VOC) in the presence of sunlight. Major sources of NOx and VOC include motor vehicle exhaust, gasoline vapors, and chemical solvents.
+                        </p>
+                        <p>
+                        Why does it matter?  Ozone exposure on the ground level (troposphere) can pose a significant health risk, especially for children with asthma. It can also damage crops, trees and other vegetation. It is a main component of urban smog. However,  it is important to note that ozone in the stratosphere actually shields earth from the sun’s harmful ultraviolet (UV) rays. 
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="{% static 'images/PM2.5.png' %}">
+                <h3>Fine Particles</h3>
+                <p>
+                Particulate matter (PM) consists of a mixture of solid and liquid droplets. Particles less than 10 micrometers are so small that they can enter the lungs, posing a serious threat. These small particles are typically divided into two categories: fine particles (<2.5µm) and coarse particles (>2.5µm and <10µm). 
+                <!--The main sources of fine particles include motor vehicles, industrial processes, and power plants. Sources of coarse particles include grinding/crushing operations, roadways, and dusty industries. Exposure to PM has been linked to aggravated conditions for those with heart or lung diseases. -->
+                </p>
+                <p>
+                <a class="btn" data-toggle="modal" data-target="#PM25Modal" href="#">Learn More</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- PM2.5 Modal -->
+        <div class="modal fade" id="PM25Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">PM2.5</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                        What is it? Particulate matter, also known as particle pollution or PM, is a broad category of small particles and liquid droplets. PM consists of substances such as nitrates, sulfates, organic chemicals, metals, and soil or dust particles. PM-2.5 are particles that have a diameter with 2.5 micrometers or less, and are generally referred to as “fine particles”. These particles tend to be found in smoke and haze, such as from urban air pollution and forest fires. They can also form from reactions between gases emitted from power plants, industries, and automobiles.
+                        </p>
+                        <p>
+                        Why does it matter? Because PM-2.5 are finer particles, they are more likely to enter and settle in human lungs. Young children or the elderly are more susceptible to effects from PM-2.5. In addition, people who exercise frequently outdoors are more vulnerable to health effects of PM-2.5, since particle uptake is higher during physical activity. Particles often contain microscopic solids or liquid droplets that have been scientifically shown to aggravate respiratory diseases such as asthma, increase likelihood of premature death in people with heart and lung disease, and induce irregular heartbeat.
+                        </p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="{% static 'images/PM10.png' %}">
+                <h3>Coarse Particles</h3>
+                <p>
+                Particulate matter (PM) consists of a mixture of solid and liquid droplets. Particles less than 10 micrometers are so small that they can enter the lungs, posing a serious threat. These small particles are typically divided into two categories: fine particles (<2.5µm) and coarse particles (>2.5µm and <10µm). 
+                <!--The main sources of fine particles include motor vehicles, industrial processes, and power plants. Sources of coarse particles include grinding/crushing operations, roadways, and dusty industries. Exposure to PM has been linked to aggravated conditions for those with heart or lung diseases. -->
+                </p>
+                <p>
+                <a class="btn" data-toggle="modal" data-target="#PM10Modal" href="#">Learn More</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PM10 Modal -->
+    <div class="modal fade" id="PM10Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">PM10</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                    What is it? Particulate matter, also known as particle pollution or PM, is a broad category of small particles and liquid droplets. PM consists of substances such as nitrates, sulfates, organic chemicals, metals, and soil or dust particles. PM-10 are particles that have a diameter of 10 micrometers or less, and are referred to as respirable suspended particles (RSP). PM-10 can come in the form of soot or dust and is usually found near roadways or dusty industrial sites. These particles are coarser than PM-2.5 but are still considered to be a health hazard. 
+                    </p>
+                    <p>
+                    Why does it matter?  Because PM-10 are coarser than PM-2.5, and therefore less likely to get buried deep within lungs and cause respiratory ailments. However, PM-10 is similar to PM-2.5 in that it most strongly affects young children, the elderly, and frequent outdoor exercisers. Like PM-2.5, it can contribute to health problems such as more pronounced asthma and bronchitis, and weakened immune systems.
+                    </p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- line divider -->
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break-border"></div>
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break"></div>
+
+
+    <!-- CALIBRATION SECTION -->
+
+    <div class="row featurette" style="padding-left: 20px; padding-right: 20px; padding-top: 110px">
+        <h2 class="featurette-heading">
+            <font color="#1560ac">How have we calibrated our sensors?</font> 
+        </h2>
+        <br>
+
+        <p class="lead">
+        Every node is outfitted with 4 electrochemical sensors, which output millivolt readings. Using research grade instrumentation in the Parsons laboratory, we calibrated every sensor individually. The goal of the calibration process was to provide a precise conversion of the electrochemical sensor millivolt readings to a parts per billion unit of measurement for the individual gas species. Using an airtight metal chamber which fit two nodes at a time, we created a system where air was pumped in through tubing to the nodes and out through tubing to the equipment, so that both the nodes and the equipment could measure the same gas pulses. Using a linear regression, the relationship between the millivolt readings from the sensors and the ppb concentrations from the instruments created. 
+        </p>
+
+
+    </div>
+
+
+    <!-- line divider -->
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break-border"></div>
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break"></div>
+
+
+    <!-- AQI SECTION --> 
+
+    <div class="row featurette" style="padding-left: 20px; padding-right: 20px; padding-top: 110px">
+        <h2 class="featurette-heading">
+            <font color="#1560ac">How are we measuring air quality?</font> 
+        </h2>
+        <br>
+        <p class="lead">
+        Air quality is monitored in the United States by the Environmental Protection Agency (EPA), which determines air quality using a composite Air Quality Index (AQI). We devised our own AQI by adjusting for the unique measurement schemes calibrated on our sensor nodes. The index determines overall quality based on concentrations of fine particulate matter, carbon monoxide, and ozone. Concentrations are used to produce an index value, ranging from good to unhealthy.
+        </p>
+        <div>
+            <img id="aqiTable" src="{% static 'images/aqi_table2.jpg' %}">
+        </div>
+
+    </div>
+
+    <!-- line divider -->
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break-border"></div>
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break"></div>
+
+
+    <!-- CONTACT SECTION -->
+
+    <div class="row featurette" style="padding-left: 2%; padding-right: 2%">
+        <h2 class="featurette-heading">
+            <font color="#000">Contact Us</font> 
+            <span class="text-muted"></span>
+        </h2>
+        <br>
+        <p class="lead">
+        Please contact us at <a href="mailto:clairity@mit.edu">clairity@mit.edu</a> with any questions. 
+        </p>
+    </div>
+
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break-border"></div>
+    <div class="col-md-12 line-break"></div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+    var viewer = new JSC3D.Viewer(document.getElementById('cv'));
+    viewer.setParameter('SceneUrl',         '{% static "images/node.stl" %}');
+    viewer.setParameter('ModelColor',       '#CAA618');
+    viewer.setParameter('BackgroundColor1', '#E5D7BA');
+    viewer.setParameter('BackgroundColor2', '#383840');
+    viewer.setParameter('RenderMode',       'flat');
+    viewer.init();
+    viewer.update();
+</script>
+    <script src="{% static 'js/howitworks.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/project.js' %}"></script>
+    <script src="{% static 'js/jquery.caption.min.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/project.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/howitworks.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/captionjs.min.css' %}" />
+{% endblock %}

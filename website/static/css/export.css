@@ -1,0 +1,34 @@
+body {
+    padding-top: 50px;
+}
+.content{
+    padding: 40px 15px;
+}
+.btn-sm, .btn-group-sm>.btn {
+    padding: 7px 11px;
+    margin: 4px;
+
+}
+.btn-node {
+    width:115px;
+    height:42px;
+    white-space: normal;
+    vertical-align: middle;
+    line-height: 15px;
+}
+
+#disclaimer{
+	white-space: normal;
+	word-break: normal;
+}
+
+#loading {
+    background:#FFFFFF url(../images/ajax-loader.gif) no-repeat center center;
+    height: 200px;
+    width: 200px;
+    position: relative;
+    left: 35%;
+    top: 50%;
+    margin: -25px 0 0 -25px;
+    z-index: 1000;
+}

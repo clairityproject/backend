@@ -20,8 +20,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'j5_2%tes=mq$hxwo&@ohha@=xxh4$os&b%lj!7mse4y9i76mug'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = False
+DEBUG = True
+#DEBUG = False
 
 TEMPLATE_DEBUG = True
 
@@ -58,6 +58,20 @@ MIDDLEWARE_CLASSES = (
     'data.middleware.cross_domain_middleware.XsSharing',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    #"website.processors.context_processors.admin_media_prefix",
+    "django.core.context_processors.request",
+)
+
+
+
 ROOT_URLCONF = 'airquality.urls'
 
 WSGI_APPLICATION = 'airquality.wsgi.application'
@@ -93,6 +107,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
 
 # django-tastypie settings
 TASTYPIE_DEFAULT_FORMATS = ['json']

@@ -21,12 +21,6 @@ urlpatterns = patterns('',
     url(r'^api/', include(dataurls)),
 
     #:::::::::::::::::::::::::::::
-    #    website
-    #:::::::::::::::::::::::::::::
-    url(r'^$', index , name='home'),
-    url(r'^export/', 'website.views.export', name='export'),
-
-    #:::::::::::::::::::::::::::::
     #    admin
     #:::::::::::::::::::::::::::::
     url(r'^admin/', include(admin.site.urls)),
@@ -41,6 +35,13 @@ urlpatterns = patterns('',
     #url(r'^latest/week/$', 'data.views.get_latest', {'week':True} ),
     url(r'^graph/all','data.views.graph_data'),
     url(r'^download/csv/', 'data.views.download_csv'),
+
+    #:::::::::::::::::::::::::::::
+    #    website
+    #:::::::::::::::::::::::::::::
+    url(r'^site/html/', include('website.urls')),
+    url(r'^site/', include('website.urls')),
+    url(r'', include('website.urls')),
 )
 
 handler500 = 'website.views.my_custom_error_view'

@@ -1,14 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-    <form action="/export">
-    {% for node in form.nodes %}
-    {{ node.id}}
-    {% endfor %}
-    </form>
-</body>
-</html>
+{% extends 'page.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row content">
+        <div class="col-md-4">
+            <div class="row">
+                <h4>Nodes</h4>
+                <a href="#" id="1" class="btn btn-sm btn-default btn-node" style="vertical-align: middle">MIT Museum</a>
+                <a href="#" id="2" class="btn btn-sm btn-default btn-node">Next House Dining </a>
+                <a href="#" id="3" class="btn btn-sm btn-default btn-node">Stratton Student Center</a>
+                <!--<a href="#" id="4" class="btn btn-sm btn-default btn-node">CoGen Plant</a>-->
+                <a href="#" id="5" class="btn btn-sm btn-default btn-node">Burton Conner </a>
+                <a href="#" id="6" class="btn btn-sm btn-default btn-node">Media Lab </a>
+                <a href="#" id="7" class="btn btn-sm btn-default btn-node">Briggs Field </a>
+                <a href="#" id="8" class="btn btn-sm btn-default btn-node">Next House Courtyard</a>
+                <!--<a href="#" id="9" class="btn btn-sm btn-default btn-node">Kresge Parking Lot </a>-->
+                <a href="#" id="10" class="btn btn-sm btn-default btn-node">Green Building Roof</a>
+                <a href="#" id="11" class="btn btn-sm btn-default btn-node">West Parking Garage</a>
+                <a href="#" id="12" class="btn btn-sm btn-default btn-node">Parsons Laboratory</a>
+                <a href="#" id="13" class="btn btn-sm btn-default btn-node">Cafe 4 </a>
+                <!--        <a href="#" id="14" class="btn btn-sm btn-default btn-node">Facilities Vehicle</a> -->
+                <a href="#" id="15" class="btn btn-sm btn-default btn-node">Killian Court </a>
+                <a href="#" id="16" class="btn btn-sm btn-default btn-node">Building 16</a>
+                <a href="#" id="17" class="btn btn-sm btn-default btn-node">Mass Ave / Vassar Parking</a>
+                <a href="#" id="18" class="btn btn-sm btn-default btn-node">Building 1</a>
+                <!--<a href="#" id="19" class="btn btn-sm btn-default btn-node">Broken Node</a>-->
+                <a href="#" id="20" class="btn btn-sm btn-default btn-node">Walker Memorial</a>
+                <a href="#" id="21" class="btn btn-sm btn-default btn-node">Green Building</a>
+                <a href="#" id="22" class="btn btn-sm btn-default btn-node">Stata Loading Dock</a>
+                <a href="#" id="23" class="btn btn-sm btn-default btn-node">Sloan School</a>
+                <!--<a href="#" id="24" class="btn btn-sm btn-default btn-node">Tech Shuttle</a>-->
+                <a href="#" id="25" class="btn btn-sm btn-default btn-node">MIT Medical Parking</a>
+            </div>
+            <div>
+                <p>
+                Real time data unavailable for mobile platforms and the co-gen plant
+                </p>
+            </div>
+
+            <div class="row">
+                <h4>Data</h4>
+                <a href="#" id="dylosBig" class="btn btn-block btn-sm btn-default btn-sensor">Coarse Particles</a>
+                <a href="#" id="dylosSmall" class="btn btn-block btn-sm btn-default btn-sensor">Fine Particles</a>
+                <a href="#" id="no" class="btn btn-block btn-sm btn-default btn-sensor">NO</a>
+                <a href="#" id="o3" class="btn btn-block btn-sm btn-default btn-sensor">O<sub>3</sub></a>
+                <a href="#" id="no2" class="btn btn-block btn-sm btn-default btn-sensor">NO<sub>2</sub></a>
+                <a href="#" id="co" class="btn btn-block btn-sm btn-default btn-sensor">CO</a>
+            </div>
+        </div> 
+        <div id="graph-area" class="col-md-8">
+            <div id="graph">
+                <h2>Graph Area</h2>
+                <pre>To draw a graph, please select nodes and data type </pre>
+            </div>
+            <a href="#" id="download-csv" class="btn btn-block btn-lg btn-success">download raw data in a csv file</a>
+            <pre id="disclaimer" style="margin-top: 10px">Disclaimer: While every effort has been made to ensure quantitative accuracy of measurements, these sensors were not calibrated against established regulatory standards and are not intended to be a replacement for regulatory-grade measurements. As of May 6, calibrations are not finalized and data is subject to change. For more information, please contact clairity@mit.edu </pre>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/export.js' %}"></script>
+    <script src="http://code.highcharts.com/stock/highstock.js"></script>
+    <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/export.css' %}" />
+{% endblock %}

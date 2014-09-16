@@ -1,0 +1,163 @@
+{% extends 'page.html' %}
+{% load static %}
+
+{% block content %}
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+        <div class="item active">
+            <img style="opacity:0.7" src="{% static 'images/unitphotos.jpg' %}" id="carousel_image">
+            <div class="container">
+                <div class="caption-overlay"></div>
+                <div class="carousel-caption">
+                    <h1> MIT's Air Quality Network </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="item">
+            <img style="opacity:0.85" src="{% static 'images/campusimage.jpg' %}" id="carousel_image">
+            <div class="container">
+                <div class="caption-overlay"></div>
+                <div class="carousel-caption">
+                    <h1> Visualize Real Time Data </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="item">
+            <img style="opacity:0.85" src="{% static 'images/mitdome.png' %}" id="carousel_image">
+            <div class="container">
+                <div class="caption-overlay"></div>
+                <div class="carousel-caption">
+                    <h1>Discover Trends in Our Air. </h1>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+
+<!-- ABOUT SECTION -->
+<hr class="featurette-divider">
+<br><br>
+<div class="row featurette" style="padding-left: 90px; padding-right: 90px">
+    <h2 class="featurette-heading">
+        What is CL<font color="#1560ac">AIR</font>ITY? 
+        <span class="text-muted">Our Mission:</span>
+    </h2>
+    <p class="lead" style="padding-left: 110px; padding-right: 110px">				
+    Assess the exposure of the MIT population to airborne pollution through the design and implementation of a distributed air quality sensor network on MIT’s campus.
+    </p>
+    <br>
+    <p class="lead">
+    Air quality and well-being are directly connected, as <a
+        href="http://www.who.int/mediacentre/factsheets/fs313/en/">poor air
+        quality</a> has proven detrimental to human health. Currently, air quality
+    is monitored at select places throughout a city, but because of their sparse
+    locations they do not give very much information about the air that we are
+    breathing. However, new sensor technology can be used to provide this
+    information at a greater resolution.  We believe it is important that the
+    average person has accessible, easy-to-understand information on air quality,
+    and our goal is to provide the MIT community with real-time air quality updates
+    through data from our sensors. We hope our project will be innovative in using
+    21st-century technologies to rapidly inform the public on environmental issues.
+    </p>
+</div>
+
+<!-- line divider -->
+<div class="container">
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break-border"></div>
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break"></div>
+</div>
+
+
+<div class="row featurette" style="padding-left: 90px; padding-right: 90px">
+    <h2 class="featurette-heading">
+        <font color="#1560ac">Our Network</font> 
+        <span class="text-muted"></span>
+    </h2>
+    <br>
+    <p class="lead">
+    The goal of our network is to measure local air quality and make it easily
+    understandable to the public. We deployed 24 sensor nodes on the MIT campus
+    that monitor concentrations of five types of pollutants in both indoor and
+    outdoor locations. Data collected from the sensors is available on our
+    website in real time, and may be graphically displayed or downloaded by
+    individual users. The network serves as a generic testbed or prototype for
+    future air quality networks, for deployment across a diverse array of urban
+    and rural environments in both the developed and developing world.
+    </p>
+
+    <p class = "lead">
+    To read more about the project, download the project presentation or summary report.
+    </p>
+    <a href="{% static 'documents/presentation.pdf' %}" class="btn btn-default btn-primary btn-lg" style="color: white">
+        <i class="fa fa-download"></i> Project Presentation (PDF)
+    </a>
+    <a href="{% static 'documents/report.pdf'%}" class="btn btn-default btn-primary btn-lg" style="color: white; margin-left: 15px">
+        <i class="fa fa-download"></i>  Summary Report (PDF)
+    </a>
+</div>
+
+<!--</div>-->
+
+
+
+<!-- line divider -->
+<div class="container">
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break-border"></div>
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break"></div>
+</div>
+<!-- CONTACT SECTION -->
+
+<div class="row featurette" style="padding-left: 90px; padding-right: 90px">
+    <h2 class="featurette-heading">
+        <font color="#000">Contact Us</font> 
+        <span class="text-muted"></span>
+    </h2>
+    <br>
+    <p class="lead">
+    Please contact us at <a href="mailto:clairity@mit.edu">clairity@mit.edu</a> with any questions. 
+    </p>
+</div>
+
+<br>
+<br>
+<br>
+
+<hr class="half-rule"/>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/project.js' %}"></script>
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/project.css' %}" />
+{% endblock %}

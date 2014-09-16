@@ -1,0 +1,159 @@
+{% extends 'page.html' %}
+{% load static %}
+{% block content %}
+<!-- Photo Header -->
+<div class="container" style="padding-top:80px">
+ 
+    <div class="col-md-12 col-sm-12 team-image-display">
+        <img id="aboutus" src="{% static 'images/aboutus.png' %}">
+    </div>
+
+<!-- line divider -->
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break-border"></div>
+    <div class="col-md-12 line-break"></div>
+    <div class="col-md-12 line-break"></div>
+  
+
+<!-- short class description -->
+
+      <br><br>
+      <div class="row featurette" style="padding-left: 2%">
+       <h2 class="featurette-heading">
+           <font color="#1560ac">The Team: </font> 
+           <span class="text-muted">Who are we?</span>
+       </h2>
+      <br>
+      <p class="lead">
+        We are all students from the MIT Civil and Environmental Engineering Class of 2014, and this is our senior design lab project. After several years of experience focusing in either civil or environmental work, we regrouped in our last semester to build an innovative network project, taking advantage of our diverse experiences. CL<font color="#1560ac">AIR</font>ITY was built by utilizing our varied technical and qualitative expertise. Students divided into teams of 3-5 students to work on the calibration, coding, communication, logistics, or hardware aspects of our project. 
+      </p>
+      </div>
+
+      <div class="row featurette" id="team_descriptions">
+      <p>
+        <font class="team_name">Calibration: </font>The Calibration Team ran designed and implemented laboratory tests through which our sensors were calibrated against high-fidelity lab instruments. The result is a node that reports high-accuracy air quality data at a one-hundredth of the cost. 
+      </p>
+      <p>
+         <font class="team_name">Coding: </font>The Coding Team was responsible for writing the code to locally store the air quality data and push it to a database. In addition, they also collaborated with many of the other teams to troubleshoot and optimize the code.
+      </p>
+      <p>
+         <font class="team_name">Communications: </font>The Communications Team created this website in order to display the air quality data from the sensor network. They also coordinated the public displays of the network data, seen throughout campus and featured at the MIT Museum Summer Exhibit 2014. 
+      </p>
+      <p>
+         <font class="team_name">Logistics: </font>The Logistics team determined the locations for each of our deployed nodes and coordinated the efforts with external stakeholders (e.g. MIT Facilities) to ensure a smooth installation process. Based on the chosen locations, we developed suitable mounting and weatherproofing schemes to ensure our nodes remained safe.   
+      </p>
+      <p>
+         <font class="team_name">Hardware: </font>The Hardware Team assembled and wired each node at the beginning of the term and troubleshot any malfunctioning or false-reading nodes throughout the project. Hardware also prepared and assembled the casing, wiring, and power configurations, which differ depending on the location of the node.
+      </p>
+</div>
+<!-- team image icons -->
+    <div class="col-md-4 col-sm-4 team-image-display" style="padding-top: 30px">
+      <div class="thumbnail col-md-12">
+        <div class="team-image-display-background"></div>
+        <div class="team-details" id="calibration">
+          <div class="team-description">
+            Calibration Team
+            <p class="memberNames">Paula Gonzalez, Matthew Monheit, Theresa Santiano-McHatton</p>
+          </div>
+        </div>
+        <img src="{% static 'images/calibration1.jpg' %}" class="team-image-photo">
+      </div>
+    </div>
+    
+    <div class="col-md-4 col-sm-4 team-image-display" style="padding-top: 30px">
+      <div class="thumbnail col-md-12">
+        <div class="team-image-display-background"></div>
+        <div class="team-details" id="coding">
+          <div class="team-description">
+            Coding Team
+            <p class="memberNames">Sidhant Pai, Obinna Okwodu, Carmen Castanos</p>
+          </div>
+        </div>
+        <img src="{% static 'images/coding_normal.jpg' %}" class="team-image-photo">
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-4 team-image-display" style="padding-top: 30px">
+      <div class="thumbnail col-md-12">
+        <div class="team-image-display-background"></div>
+        <div class="team-details" id="communications">
+          <div class="team-description">
+            Communications Team 
+            <p class="memberNames">Sydney Beasley, Derek Chang, Catherine Cheng, David Ogutu, Sharone Small</p>
+
+          </div>
+        </div>
+        <img src="{% static 'images/communications1.jpg' %}" class="team-image-photo">
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-4 team-image-display">
+      <div class="thumbnail col-md-12">
+        <div class="team-image-display-background"></div>
+        <div class="team-details" id="logistics">
+          <div class="team-description">
+            Logistics Team
+            <p class="memberNames">Vanya Britto, Carolina Kaelin, Linda Seymour, Priscilla Soto, Maria Cassidy</p>
+
+          </div>
+        </div>
+        <img src="{% static 'images/logistics1.jpg' %}" class="team-image-photo">
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-4 team-image-display">
+      <div class="thumbnail col-md-12">
+        <div class="team-image-display-background"></div>
+        <div class="team-details" id="hardware">
+          <div class="team-description">
+            Hardware Team
+            <p class="memberNames">Tim Wilson, Katie Spies, Zachary Balgobin, Daphne Basangwa, </p>
+
+          </div>
+        </div>
+        <img src="{% static 'images/hardware1.jpg' %}" class="team-image-photo">
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-4 team-image-display">
+      <div class="thumbnail col-md-12">
+        <div class="team-image-display-background"></div>
+        <div class="team-details" id="faculty">
+          <div class="team-description">
+            Faculty  
+            <p class="memberNames">Jesse Kroll, Colette Heald, Eben Cross</p>
+
+          </div>
+        </div>
+        <img src="{% static 'images/faculty1.jpg' %}" class="team-image-photo">
+      </div>
+    </div>
+  
+
+<div class="col-md-12 line-break"></div>
+<div class="col-md-12 line-break-border"></div>
+<div class="col-md-12 line-break"></div>
+
+
+
+      <!-- CONTACT SECTION -->
+
+<div class="row featurette" style="padding-left: 2%; padding-right: 2%">
+  <h2 class="featurette-heading">
+    <font color="#000">Contact Us</font> 
+    <span class="text-muted"></span>
+  </h2>
+  <br>
+  <p class="lead">
+           Please contact us at <a href="mailto:clairity@mit.edu">clairity@mit.edu</a> with any questions. 
+  </p>
+</div>
+
+<div class="col-md-12 line-break"></div>
+<div class="col-md-12 line-break-border"></div>
+<div class="col-md-12 line-break"></div>
+
+</div>
+
+{% endblock %}
